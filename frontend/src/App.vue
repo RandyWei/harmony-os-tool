@@ -1,9 +1,18 @@
 <script lang="ts" setup>
-import HelloWorld from './components/HelloWorld.vue'</script>
+import HelloWorld from './components/HelloWorld.vue'
+import {useDark,useToggle} from '@vueuse/core'
 
+const isDark = useDark()
+const darkToggle = useToggle(isDark)
+
+
+</script>
 <template>
   <img id="logo" alt="Wails logo" src="./assets/images/logo-universal.png"/>
   <HelloWorld/>
+
+  <el-button type="warning" round @click="darkToggle()">Toggle Dark</el-button>
+
 </template>
 
 <style>

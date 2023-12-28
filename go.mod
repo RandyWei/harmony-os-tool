@@ -1,4 +1,4 @@
-module changeme
+module icu.bughub.app/harmonyos-tool
 
 go 1.18
 

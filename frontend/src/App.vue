@@ -1,30 +1,31 @@
 <script lang="ts" setup>
-import HelloWorld from './components/HelloWorld.vue'
-import {useDark,useToggle} from '@vueuse/core'
-
-const isDark = useDark()
-const darkToggle = useToggle(isDark)
 
 
 </script>
 <template>
-  <img id="logo" alt="Wails logo" src="./assets/images/logo-universal.png"/>
-  <HelloWorld/>
-
-  <el-button type="warning" round @click="darkToggle()">Toggle Dark</el-button>
-
+  <div class="common-layout h-screen">
+    <el-tabs type="border-card" tab-position="left" stretch class="w-full h-full">
+        <el-tab-pane><template #label><span class="font-size-4">首页</span></template>首页</el-tab-pane>
+        <el-tab-pane label="华为"><template #label><span class="font-size-4">华为</span></template>User</el-tab-pane>
+        <el-tab-pane label="Config"><template #label><span class="font-size-4">Config</span></template>Config</el-tab-pane>
+        <el-tab-pane label="Role"><template #label><span class="font-size-4">Role</span></template>Role</el-tab-pane>
+        <el-tab-pane label="Task"><template #label><span class="font-size-4">Task</span></template>Task</el-tab-pane>
+      </el-tabs>
+  </div>
 </template>
 
 <style>
-#logo {
-  display: block;
-  width: 50%;
-  height: 50%;
-  margin: auto;
-  padding: 10% 0 0;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-origin: content-box;
+.el-tabs--border-card{
+  border: 0;
+}
+.el-tabs--left.el-tabs--border-card .el-tabs__header.is-left{
+  border: 0;
+}
+.el-tabs__item{
+  min-width: 200px;
+  justify-content: center;
+  text-align: center;
+  padding:  2rem 0;
+  border: 0;
 }
 </style>

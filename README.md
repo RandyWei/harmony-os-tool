@@ -1,5 +1,7 @@
 # HarmonyOS 工具箱跨平台版本[计划支持 Windows 和 MacOS]
 
+## 所有功能均来自 [一只靓仔琦](https://space.bilibili.com/430813939) ，请支持原作者，本代码只是将工具跨平台化
+
 ## 功能
 
 ## Live Development

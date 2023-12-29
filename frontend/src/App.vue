@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import Home from "./components/Home.vue";
+import Settings from "./components/Settings.vue";
+
 //TODO 需要监测设备连接状态来决定是否激活其他的Tab
+
+
+
 </script>
 <template>
   <div class="common-layout h-screen">
@@ -9,7 +14,7 @@ import Home from "./components/Home.vue";
         <el-tab-pane label="华为"><template #label><span class="font-size-4">华为</span></template>User</el-tab-pane>
         <el-tab-pane label="Config"><template #label><span class="font-size-4">Config</span></template>Config</el-tab-pane>
         <el-tab-pane label="Role"><template #label><span class="font-size-4">Role</span></template>Role</el-tab-pane>
-        <el-tab-pane label="Task"><template #label><span class="font-size-4">Task</span></template>Task</el-tab-pane>
+        <el-tab-pane><template #label><span class="font-size-4">设置</span></template><Settings></Settings></el-tab-pane>
       </el-tabs>
   </div>
 </template>

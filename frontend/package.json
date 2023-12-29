@@ -9,13 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^10.7.1",
     "element-plus": "^2.4.4",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@babel/types": "^7.18.10",
+    "@iconify-json/ep": "^1.1.14",
     "@vitejs/plugin-vue": "^3.0.3",
     "typescript": "^4.6.4",
     "unocss": "^0.58.2",

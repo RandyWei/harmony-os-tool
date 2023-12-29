@@ -3,7 +3,6 @@ package backend
 import (
 	"errors"
 	"fmt"
-	"os"
 	"os/exec"
 	"strings"
 )
@@ -11,10 +10,10 @@ import (
 /**
  * 等待设备连接
  */
-func WaitForDevice(appDir string) (bool, error) {
+func WaitForDevice(appDir string) ([]string, error) {
 
-	cmd := exec.Command("adb", "kill-server", "&&", "adb", "wait-for-device")
-	cmd.Dir = appDir + string(os.PathSeparator) + "platform-tools"
+	devices := []string{}
+	cmd := exec.Command("adb", "devices")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -23,12 +22,28 @@ func WaitForDevice(appDir string) (bool, error) {
 			//没有安装adb
 			e = errors.New("程序依赖adb服务，需要安装adb方可使用")
 		}
-		return false, e
+		return devices, e
 	}
 
 	execResult := string(output)
-
+	//cannot connect to daemon
 	fmt.Println(execResult)
 
-	return strings.Contains(execResult, "Android Debug Bridge"), nil
+	if strings.Contains(execResult, "List of devices attached") {
+		//按行分割
+		for index, line := range strings.Split(execResult, "\n") {
+			if index == 0 {
+				continue
+			}
+			if strings.Contains(line, "device") {
+				//获取设备名称
+				deviceName := strings.Split(line, "\t")[0]
+				fmt.Println(deviceName)
+				devices = append(devices, deviceName)
+			}
+		}
+		return devices, nil
+	}
+
+	return devices, nil
 }

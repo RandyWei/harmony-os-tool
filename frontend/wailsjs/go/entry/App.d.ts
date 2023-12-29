@@ -7,4 +7,4 @@ export function Greet(arg1:string):Promise<string>;
 
 export function InstallAdb():Promise<boolean>;
 
-export function WaitForDevice():Promise<boolean>;
+export function WaitForDevice():Promise<Array<string>>;

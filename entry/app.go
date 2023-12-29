@@ -31,7 +31,8 @@ func (a *App) StartUp(ctx context.Context) {
 		panic(err)
 	}
 	appDir := configDir + string(os.PathSeparator) + a.bundleId
-
+	//设置环境变量
+	os.Setenv("PATH", os.Getenv("PATH")+":"+appDir+string(os.PathSeparator)+"platform-tools")
 	a.AppDir = appDir
 }
 
@@ -40,7 +41,7 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) WaitForDevice() (bool, error) {
+func (a *App) WaitForDevice() ([]string, error) {
 	return backend.WaitForDevice(a.AppDir)
 }
 

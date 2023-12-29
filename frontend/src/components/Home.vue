@@ -2,6 +2,7 @@
 import {onMounted, reactive} from 'vue'
 import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/App'
 import  {ConnectState}  from '../models/ConnectState'
+import Device from "./Device.vue";
 
 
 const data = reactive({
@@ -21,7 +22,8 @@ const data = reactive({
 function checkEnv() {
   data.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
-    // data.deviceConnectState = result
+    data.deviceConnectState = ConnectState.CONNECTED
+    data.deviceName = result[0]
   }).catch(err => {
     data.deviceConnectState = ConnectState.ERROR
     data.errorTip = err
@@ -93,6 +95,8 @@ onMounted(() => {
           </div>
         </template>
       </el-result>
+
+      <Device :device="data.deviceName"></Device>
 
     </div>
     

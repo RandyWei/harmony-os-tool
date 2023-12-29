@@ -2,7 +2,7 @@
 import {onMounted, reactive} from 'vue'
 import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/App'
 import  {ConnectState}  from '../models/ConnectState'
-import Device from "./Device.vue";
+import DeviceView from "./DeviceView.vue";
 
 
 const data = reactive({

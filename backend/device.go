@@ -7,6 +7,9 @@ import (
 	"strings"
 )
 
+/**
+ * 等待设备连接
+ */
 func WaitForDevice() (bool, error) {
 	cmd := exec.Command("adb1", "kill-server", "&&", "adb", "wait-for-device")
 

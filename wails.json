@@ -9,5 +9,8 @@
   "author": {
     "name": "RandyWei",
     "email": "smile561607154@163.com"
+  },
+  "info": {
+    "productVersion": "0.0.1"
   }
 }

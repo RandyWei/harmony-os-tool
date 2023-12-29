@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {reactive} from 'vue'
-import {Greet} from '../../wailsjs/go/main/App'
+import {Greet} from '../../wailsjs/go/entry/App'
 import  {ConnectState}  from '../models/ConnectState'
 
 

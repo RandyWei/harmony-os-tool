@@ -41,7 +41,7 @@ func (a *App) Greet(name string) string {
 }
 
 func (a *App) WaitForDevice() (bool, error) {
-	return backend.WaitForDevice()
+	return backend.WaitForDevice(a.AppDir)
 }
 
 func (a *App) InstallAdb() (bool, error) {

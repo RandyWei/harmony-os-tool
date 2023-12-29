@@ -3,6 +3,7 @@ package backend
 import (
 	"errors"
 	"fmt"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -10,9 +11,10 @@ import (
 /**
  * 等待设备连接
  */
-func WaitForDevice() (bool, error) {
-	cmd := exec.Command("adb1", "kill-server", "&&", "adb", "wait-for-device")
+func WaitForDevice(appDir string) (bool, error) {
 
+	cmd := exec.Command("adb", "kill-server", "&&", "adb", "wait-for-device")
+	cmd.Dir = appDir + string(os.PathSeparator) + "platform-tools"
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err.Error())

@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"icu.bughub.app/harmonyos-tool/backend"
+	"icu.bughub.app/harmonyos-tool/backend/models"
 )
 
 // App struct
@@ -13,6 +14,7 @@ type App struct {
 	ctx      context.Context
 	bundleId string
 	AppDir   string
+	Devices  []models.Device
 }
 
 // NewApp creates a new App application struct
@@ -41,7 +43,7 @@ func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
 }
 
-func (a *App) WaitForDevice() ([]string, error) {
+func (a *App) WaitForDevice() ([]models.Device, error) {
 	return backend.WaitForDevice(a.AppDir)
 }
 

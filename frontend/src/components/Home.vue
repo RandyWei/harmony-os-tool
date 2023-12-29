@@ -3,16 +3,22 @@ import {onMounted, reactive} from 'vue'
 import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/App'
 import  {ConnectState}  from '../models/ConnectState'
 import DeviceView from "./DeviceView.vue";
+import {models} from "../../wailsjs/go/models";
 
+const connection = reactive({
+  deviceConnectState: ConnectState.CONNECTING,
+  errorTip: ""
+})
 
-const data = reactive({
-  deviceName: "",
-  appDir : "",
+const adb = reactive({
   installLoading: false,
   installText:"下载安装ADB",
   installError:"",
-  deviceConnectState: ConnectState.CONNECTING,
-  errorTip: ""
+})
+
+const data = reactive({
+  device: {} as models.Device,
+  appDir : "",
 })
 
 /**
@@ -20,13 +26,13 @@ const data = reactive({
  * 主要是检查是否已经安装了adb
  */
 function checkEnv() {
-  data.deviceConnectState = ConnectState.CONNECTING
+  connection.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
-    data.deviceConnectState = ConnectState.CONNECTED
-    data.deviceName = result[0]
+    connection.deviceConnectState = ConnectState.CONNECTED
+    data.device = result[0]
   }).catch(err => {
-    data.deviceConnectState = ConnectState.ERROR
-    data.errorTip = err
+    connection.deviceConnectState = ConnectState.ERROR
+    connection.errorTip = err
   })
   
 }
@@ -34,17 +40,17 @@ function checkEnv() {
  * 安装adb
  */
 function installAdb() {
-  data.installLoading = true
-  data.installText = "下载安装中..."
+  adb.installLoading = true
+  adb.installText = "下载安装中..."
   InstallAdb().then(result => {
     checkEnv()
-    data.installText = "下载安装ADB"
-    data.installLoading = false
+    adb.installText = "下载安装ADB"
+    adb.installLoading = false
   }).catch(err => {
     console.error(err)
-    data.installError = err
-    data.installText = "下载安装ADB"
-    data.installLoading = false
+    adb.installError = err
+    adb.installText = "下载安装ADB"
+    adb.installLoading = false
   })
 }
 
@@ -63,15 +69,15 @@ onMounted(() => {
 
 <template>
   <main>
-    <div v-loading="data.deviceConnectState === ConnectState.CONNECTING" element-loading-background="#00000000" id="result" class="w-full h-screen">
+    <div v-loading="connection.deviceConnectState === ConnectState.CONNECTING" element-loading-background="#00000000" id="result" class="w-full h-screen">
       
       <el-result
-      v-if="data.deviceConnectState === ConnectState.ERROR"
+      v-if="connection.deviceConnectState === ConnectState.ERROR"
       class="h-full">
         <template #icon>
           <img src="../assets/images/error.png" width="300"  />
         </template>
-        <template #title><h2 class="text-red">{{ data.errorTip }}</h2></template>
+        <template #title><h2 class="text-red">{{ connection.errorTip }}</h2></template>
         <template #sub-title>
           <div class="flex-col w-full " >
             <ul class="w-full">
@@ -87,8 +93,8 @@ onMounted(() => {
                 <div>如果不想手动安装，可以尝试点击下面的按钮自动下载安装</div>
                 <div>安装目录为：{{ data.appDir }}</div>
                 <div>自动安装的不会配置到环境变量，如果想卸载可以在设置中进行卸载</div>
-                <div class="flex justify-center pt pb"><el-button type="primary" class="w-full" @click="installAdb()" :loading="data.installLoading">下载安装ADB</el-button></div>
-                <div><span class="text-red">{{ data.installError }}</span></div>
+                <div class="flex justify-center pt pb"><el-button type="primary" class="w-full" @click="installAdb()" :loading="adb.installLoading">下载安装ADB</el-button></div>
+                <div><span class="text-red">{{ adb.installError }}</span></div>
               </li>
             </ul>
 
@@ -96,7 +102,7 @@ onMounted(() => {
         </template>
       </el-result>
 
-      <Device :device="data.deviceName"></Device>
+      <DeviceView :device="data.device"></DeviceView>
 
     </div>
     

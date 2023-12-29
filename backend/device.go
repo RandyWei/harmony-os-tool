@@ -5,15 +5,17 @@ import (
 	"fmt"
 	"os/exec"
 	"strings"
+
+	"icu.bughub.app/harmonyos-tool/backend/models"
 )
 
 /**
  * 等待设备连接
  */
-func WaitForDevice(appDir string) ([]string, error) {
+func WaitForDevice(appDir string) ([]models.Device, error) {
 
-	devices := []string{}
-	cmd := exec.Command("adb", "devices")
+	devices := []models.Device{}
+	cmd := exec.Command("adb", "devices", "-l")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -36,10 +38,23 @@ func WaitForDevice(appDir string) ([]string, error) {
 				continue
 			}
 			if strings.Contains(line, "device") {
-				//获取设备名称
-				deviceName := strings.Split(line, "\t")[0]
-				fmt.Println(deviceName)
-				devices = append(devices, deviceName)
+				deviceInfos := strings.Split(line, " ")
+				device := models.Device{}
+				for index, info := range deviceInfos {
+					//获取设备名称
+					if index == 0 {
+						device.Id = info
+					}
+
+					if strings.Contains(info, "product") {
+						device.Product = strings.Split(info, ":")[1]
+					}
+					if strings.Contains(info, "model") {
+						device.Model = strings.Split(info, ":")[1]
+					}
+				}
+
+				devices = append(devices, device)
 			}
 		}
 		return devices, nil

@@ -3,6 +3,8 @@ package entry
 import (
 	"context"
 	"fmt"
+
+	"icu.bughub.app/harmonyos-tool/backend"
 )
 
 // App struct
@@ -24,4 +26,8 @@ func (a *App) StartUp(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+func (a *App) WaitForDevice() (bool, error) {
+	return backend.WaitForDevice()
 }

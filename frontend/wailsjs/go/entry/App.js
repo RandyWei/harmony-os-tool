@@ -5,3 +5,7 @@
 export function Greet(arg1) {
   return window['go']['entry']['App']['Greet'](arg1);
 }
+
+export function WaitForDevice() {
+  return window['go']['entry']['App']['WaitForDevice']();
+}

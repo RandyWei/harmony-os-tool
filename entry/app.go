@@ -14,7 +14,6 @@ type App struct {
 	ctx      context.Context
 	bundleId string
 	AppDir   string
-	Devices  []models.Device
 }
 
 // NewApp creates a new App application struct

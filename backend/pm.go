@@ -2,6 +2,7 @@ package backend
 
 import (
 	"fmt"
+	"strings"
 
 	"icu.bughub.app/harmonyos-tool/backend/constants"
 	"icu.bughub.app/harmonyos-tool/backend/models"
@@ -16,7 +17,7 @@ func CheckInstalled(packageName string) (bool, error) {
 		return false, err
 	}
 	fmt.Printf("result:%s\n", result)
-	return result != "", nil
+	return strings.Contains(result, packageName), nil
 }
 
 func ListApps() ([]models.App, error) {
@@ -27,4 +28,20 @@ func ListApps() ([]models.App, error) {
 		apps = append(apps, v)
 	}
 	return apps, nil
+}
+
+// 卸载应用
+// ```pm uninstall --user 0 com.huawei.fastapp```
+func UninstallApp(packageName string) (bool, error) {
+	result, err := AdbShellCommand("pm", "uninstall", "--user", "0", packageName)
+	fmt.Printf("UninstallApp:%s\n", result)
+	return result == "Success", err
+}
+
+// 装回应用
+// ```pm install-existing --user 0 com.huawei.fastapp```
+func InstallExistingApp(packageName string) (bool, error) {
+	result, err := AdbShellCommand("pm", "install-existing", "--user", "0", packageName)
+	fmt.Printf("InstallExistingApp:%s\n", result)
+	return strings.Contains(result, "installed"), err
 }

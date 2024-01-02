@@ -1,14 +1,28 @@
 <script setup lang="ts">
 
 import { Ref, onMounted, ref } from 'vue'
-import { ListApps } from "../../wailsjs/go/entry/Application";
+import { ListApps,UninstallApp,InstallExistingApp } from "../../wailsjs/go/entry/Application";
 import { models } from '../../wailsjs/go/models';
 
 const apps:Ref<models.App[]> = ref([])
 
+// 卸载/装回
+async function OpreationApp (app:models.App)  {
+        console.log("OpreationApp")
+    if(app.installed){
+        console.log("卸载")
+        const result = await UninstallApp(app.id)
+        console.log("卸载结果:",result)
+    }else{
+        console.log("装回")
+        const result = await InstallExistingApp(app.id)
+        console.log("装回结果:",result)
+    }
+    apps.value = await ListApps()
+}
+
 onMounted(async () => {
   apps.value = await ListApps()
-  console.log(apps)
 })
 
 </script>
@@ -26,7 +40,7 @@ onMounted(async () => {
                     <el-table-column prop="name" label="应用名称"></el-table-column>
                     <el-table-column label="操作" width="100px">
                         <template #default="scope">
-                            <el-button type="primary" size="small">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
+                            <el-button type="primary" size="small" @click="OpreationApp(scope.row)">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -37,7 +51,7 @@ onMounted(async () => {
                     <el-table-column prop="name" label="应用名称"></el-table-column>
                     <el-table-column label="操作" width="100px">
                         <template #default="scope">
-                            <el-button type="primary" size="small">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
+                            <el-button type="primary" size="small" @click="OpreationApp(scope.row)">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -48,7 +62,7 @@ onMounted(async () => {
                     <el-table-column prop="name" label="应用名称"></el-table-column>
                     <el-table-column label="操作" width="100px">
                         <template #default="scope">
-                            <el-button type="primary" size="small">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
+                            <el-button type="primary" size="small" @click="OpreationApp(scope.row)">{{ scope.row.installed ? "卸载" : "装回" }}</el-button>
                         </template>
                     </el-table-column>
                 </el-table>

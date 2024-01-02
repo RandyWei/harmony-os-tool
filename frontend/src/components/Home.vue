@@ -112,7 +112,7 @@ onMounted(() => {
         </template>
       </el-result>
 
-      <DeviceView :device="device"></DeviceView>
+      <DeviceView :device= device></DeviceView>
 
     </div>
     

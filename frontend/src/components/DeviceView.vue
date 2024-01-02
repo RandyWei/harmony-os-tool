@@ -5,7 +5,7 @@ import {models} from "../../wailsjs/go/models";
 const props = defineProps({
     device: {
         type: models.Device,
-        default: () => ({})
+        default: () => ({} as models.Device)
     }
 })
 </script>

@@ -60,3 +60,11 @@ func (a *Application) GetAppDir() string {
 func (a *Application) ListApps() ([]models.App, error) {
 	return backend.ListApps()
 }
+
+func (a *Application) UninstallApp(packageName string) (bool, error) {
+	return backend.UninstallApp(packageName)
+}
+
+func (a *Application) InstallExistingApp(packageName string) (bool, error) {
+	return backend.InstallExistingApp(packageName)
+}

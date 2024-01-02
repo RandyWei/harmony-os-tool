@@ -14,8 +14,16 @@ export function InstallAdb() {
   return window['go']['entry']['Application']['InstallAdb']();
 }
 
+export function InstallExistingApp(arg1) {
+  return window['go']['entry']['Application']['InstallExistingApp'](arg1);
+}
+
 export function ListApps() {
   return window['go']['entry']['Application']['ListApps']();
+}
+
+export function UninstallApp(arg1) {
+  return window['go']['entry']['Application']['UninstallApp'](arg1);
 }
 
 export function WaitForDevice() {

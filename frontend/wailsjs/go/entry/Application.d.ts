@@ -8,4 +8,6 @@ export function Greet(arg1:string):Promise<string>;
 
 export function InstallAdb():Promise<boolean>;
 
+export function ListApps():Promise<Array<models.App>>;
+
 export function WaitForDevice():Promise<Array<models.Device>>;

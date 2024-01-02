@@ -56,3 +56,7 @@ func (a *Application) InstallAdb() (bool, error) {
 func (a *Application) GetAppDir() string {
 	return a.AppDir
 }
+
+func (a *Application) ListApps() ([]models.App, error) {
+	return backend.ListApps()
+}

@@ -39,8 +39,9 @@ var Apps1 = [...]models.App{
 		Name:        "华为钱包",
 	},
 	{
-		Id:          "com.huawei.search",
-		Description: "下拉搜索：误解+广告",
+		Id:          "com.huawei.himovie",
+		RelatedIds:  []string{"com.huawei.himovie.partner1", "com.huawei.himovie.partner2", "com.tencent.qqlivehuawei"},
+		Description: "卸载华为视频后图库内无法打开视频",
 		Name:        "华为视频",
 	},
 	{
@@ -50,9 +51,46 @@ var Apps1 = [...]models.App{
 		Name:        "华为音乐",
 	},
 	{
+		Id:          "com.huawei.pcassistant",
+		Description: "",
+		RelatedIds:  []string{"com.huawei.android.instantshare"},
+		Name:        "华为分享",
+	},
+	{
+		Id:          "com.huawei.hwireader",
+		Description: "",
+		RelatedIds:  []string{"com.huawei.hwreader.al", "com.huawei.hnreader", "com.huawei.hwread.al", "com.huawei.hwireader"},
+		Name:        "华为阅读",
+	},
+	{
+		Id:          "com.huawei.browser",
+		Description: "",
+		RelatedIds:  []string{"com.android.browser"},
+		Name:        "华为浏览器",
+	},
+	{
+		Id:          "com.huawei.appmarket",
+		Description: "",
+		Name:        "应用商店",
+	},
+	{
+		Id:          "com.huawei.camera",
+		Description: "",
+		Name:        "华为相机",
+	},
+	{
+		Id:          "com.huawei.hwid",
+		Description: "",
+		Name:        "HMS core ",
+	},
+	{
+		Id:   "com.huawei.phoneservice",
+		Name: "服务/我的华为",
+	},
+	{
 		Id:          "com.huawei.ohos.famanager",
 		Description: "请最后卸载服务中心，据说这样能够避免弹出“服务请求失败”",
-		Name:        "服务/我的华为",
+		Name:        "服务中心",
 	},
 }
 
@@ -74,6 +112,11 @@ var Apps2 = [...]models.App{
 		Description: "双指按屏扫文字",
 		RelatedIds:  []string{"com.huawei.hiaction", "com.huawei.contentsensor"},
 		Name:        "智慧识屏",
+	},
+	{
+		Id:          "com.huawei.scanner",
+		Description: "已释放【扫一扫】相机插件,也叫【智慧视觉】，扫码功能建议使用华为浏览器或其它，打开相机的功耗较大",
+		Name:        "智慧视觉（扫一扫）",
 	},
 	{
 		Id:          "com.huawei.ohos.suggestion",
@@ -104,6 +147,163 @@ var Apps3 = [...]models.App{
 		Description: "",
 		RelatedIds:  []string{"com.huawei.hiskytone"},
 		Name:        "天际通",
+	},
+	{
+		Id:          "com.android.emergency",
+		Description: "",
+		Name:        "紧急信息",
+	},
+	{
+		Id:          "com.huawei.gameassistant",
+		Description: "",
+		Name:        "游戏空间",
+	},
+	{
+		Id:          "com.android.managedprovisioning",
+		Description: "",
+		Name:        "工作资料设置",
+	},
+	{
+		Id:          "com.android.htmlviewer",
+		Description: "",
+		Name:        "html查看器",
+	},
+	{
+		Id:          "com.baidu.input_huawei",
+		Description: "据反馈，需要先关闭安全输入法输入密码，否则卸载后不会弹出输入法\n因此请您在设置中将 【输入密码时，启用安全输入键盘】 关闭,  然后继续执行卸载\n不同机型不同情况，希望您谨慎考虑卸载自带输入法，【【小白不建议操作】】\n【无法解锁补救措施】\n在卸载前备份数据！！或提前开启仅充电模式下连接ADB!\n外接键盘解锁！",
+		RelatedIds:  []string{"com.huawei.secime"},
+		Name:        "百度输入法",
+	},
+	{
+		Id:          "com.huawei.motionservice",
+		Description: "可能影响到智慧感知、隔空操作、注视不息屏，有这些功能的机子不建议删",
+		Name:        "悬浮球",
+	},
+	{
+		Id:          "com.huawei.HwMultiScreenShot",
+		Description: "",
+		Name:        "滚动截屏",
+	},
+	{
+		Id:          "com.huawei.android.FloatTasks",
+		Description: "",
+		Name:        "悬浮导航",
+	},
+	{
+		Id:          "com.huawei.videoeditor",
+		Description: "",
+		Name:        "花瓣剪辑",
+	},
+	{
+		Id:          "com.huawei.controlcenter",
+		Description: "",
+		Name:        "多屏协同",
+	},
+	{
+		Id:          "com.example.android.notepad",
+		Description: "",
+		Name:        "备忘录",
+	},
+	{
+		Id:          "com.huawei.aod",
+		Description: "",
+		Name:        "息屏显示",
+	},
+	{
+		Id:          "com.huawei.meetime",
+		Description: "",
+		RelatedIds:  []string{"com.huawei.hwvoipservice"},
+		Name:        "畅连",
+	},
+	{
+		Id:          "com.iflytek.speechsuite",
+		Description: "",
+		RelatedIds:  []string{"com.sohu.sohuvideo.emplayer"},
+		Name:        "讯飞语音引擎",
+	},
+	{
+		Id:          "com.huawei.android.findmyphone",
+		Description: "",
+		Name:        "查找手机",
+	},
+	{
+		Id:          "com.android.mms.service",
+		Description: "",
+		Name:        "彩信服务",
+	},
+	{
+		Id:          "com.huawei.magazine",
+		Description: "",
+		Name:        "杂志锁屏",
+	},
+	{
+		Id:          "com.huawei.localBackup",
+		Description: "",
+		Name:        "备份",
+	},
+	{
+		Id:          "com.huawei.android.thememanager",
+		Description: "",
+		Name:        "主题",
+	},
+	{
+		Id:          "com.huawei.hwdetectrepair",
+		Description: "",
+		Name:        "智能检测",
+	},
+	{
+		Id:          "com.android.calculator2",
+		Description: "",
+		Name:        "计算器",
+	},
+	{
+		Id:          "com.android.emergency",
+		Description: "",
+		Name:        "个人紧急信息",
+	},
+	{
+		Id:          "com.android.deskclock",
+		Description: "",
+		Name:        "时 钟",
+	},
+	{
+		Id:          "com.android.printspooler",
+		Description: "",
+		RelatedIds:  []string{"com.huawei.printservice"},
+		Name:        "打印服务",
+	},
+	{
+		Id:          "com.huawei.hicar",
+		Description: "",
+		Name:        "HiCar智行",
+	},
+	{
+		Id:          "com.huawei.hiai",
+		Description: "",
+		Name:        "华为智慧引擎",
+	},
+	{
+		Id:          "com.huawei.hidisk",
+		Description: "云空间可能删不掉，被系统保护\n文件管理可能会一同被卸载",
+		RelatedIds:  []string{"com.huawei.hicloud"},
+		Name:        "云空间",
+	},
+	{
+		Id:   "com.huawei.android.karaoke",
+		Name: "k歌特效",
+	},
+	{
+		Id:   "com.huawei.android.projectmenu",
+		Name: "工程菜单",
+	},
+	{
+		Id:   "com.huawei.scenepack",
+		Name: "旅行助手",
+	},
+	{
+		Id:          "com.huawei.android.totemweather",
+		Description: "建议使用pure天气替代，更小更简洁更流\n或者可以使用魅族天气，简洁流畅\n并且桌面的天气时间小工具更加美观实用，款式更丰富",
+		Name:        "天气",
 	},
 }
 

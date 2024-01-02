@@ -10,11 +10,9 @@ const features:Ref<models.App[][]> = ref([])
 async function OpreationApp (app:models.App)  {
         console.log("OpreationApp")
     if(app.installed){
-        console.log("卸载")
         const result = await UninstallApp(app.id,app.related_ids)
         console.log("卸载结果:",result)
     }else{
-        console.log("装回")
         const result = await InstallExistingApp(app.id,app.related_ids)
         console.log("装回结果:",result)
     }
@@ -23,7 +21,6 @@ async function OpreationApp (app:models.App)  {
 
 onMounted(async () => {
     features.value = await ListApps()
-  console.log("apps:",features.value)
 })
 
 </script>

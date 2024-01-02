@@ -3,6 +3,7 @@ export namespace models {
 	export class App {
 	    id: string;
 	    name: string;
+	    description: string;
 	    installed: boolean;
 	    icon: string;
 	    version: string;
@@ -15,6 +16,7 @@ export namespace models {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.id = source["id"];
 	        this.name = source["name"];
+	        this.description = source["description"];
 	        this.installed = source["installed"];
 	        this.icon = source["icon"];
 	        this.version = source["version"];

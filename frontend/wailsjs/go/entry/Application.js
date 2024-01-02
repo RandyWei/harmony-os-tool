@@ -22,6 +22,10 @@ export function ListApps() {
   return window['go']['entry']['Application']['ListApps']();
 }
 
+export function ListApps1() {
+  return window['go']['entry']['Application']['ListApps1']();
+}
+
 export function UninstallApp(arg1) {
   return window['go']['entry']['Application']['UninstallApp'](arg1);
 }

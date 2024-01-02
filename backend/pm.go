@@ -20,14 +20,53 @@ func CheckInstalled(packageName string) (bool, error) {
 	return strings.Contains(result, packageName), nil
 }
 
-func ListApps() ([]models.App, error) {
+func ListApps() ([][]models.App, error) {
+	features := make([][]models.App, 0)
 	apps := make([]models.App, 0)
+	for _, v := range constants.Apps0 {
+		installed, _ := CheckInstalled(v.Id)
+		v.Installed = installed
+		apps = append(apps, v)
+	}
+	features = append(features, apps)
+
+	apps = nil
+	apps = make([]models.App, 0)
 	for _, v := range constants.Apps1 {
 		installed, _ := CheckInstalled(v.Id)
 		v.Installed = installed
 		apps = append(apps, v)
 	}
-	return apps, nil
+	features = append(features, apps)
+
+	apps = nil
+	apps = make([]models.App, 0)
+	for _, v := range constants.Apps2 {
+		installed, _ := CheckInstalled(v.Id)
+		v.Installed = installed
+		apps = append(apps, v)
+	}
+	features = append(features, apps)
+
+	apps = nil
+	apps = make([]models.App, 0)
+	for _, v := range constants.Apps3 {
+		installed, _ := CheckInstalled(v.Id)
+		v.Installed = installed
+		apps = append(apps, v)
+	}
+	features = append(features, apps)
+
+	apps = nil
+	apps = make([]models.App, 0)
+	for _, v := range constants.Apps4 {
+		installed, _ := CheckInstalled(v.Id)
+		v.Installed = installed
+		apps = append(apps, v)
+	}
+	features = append(features, apps)
+
+	return features, nil
 }
 
 // 卸载应用

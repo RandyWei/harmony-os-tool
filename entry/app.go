@@ -65,10 +65,10 @@ func (a *Application) ListApps1() ([]models.App, error) {
 	return make([]models.App, 0), nil
 }
 
-func (a *Application) UninstallApp(packageName string) (bool, error) {
-	return backend.UninstallApp(packageName)
+func (a *Application) UninstallApp(packageName string, relatedIds []string) (bool, error) {
+	return backend.UninstallApp(packageName, relatedIds)
 }
 
-func (a *Application) InstallExistingApp(packageName string) (bool, error) {
-	return backend.InstallExistingApp(packageName)
+func (a *Application) InstallExistingApp(packageName string, relatedIds []string) (bool, error) {
+	return backend.InstallExistingApp(packageName, relatedIds)
 }

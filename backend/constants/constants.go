@@ -46,11 +46,7 @@ var Apps1 = [...]models.App{
 	{
 		Id:          "com.huawei.music",
 		Description: "",
-		Name:        "华为音乐",
-	},
-	{
-		Id:          "com.android.mediacenter",
-		Description: "媒体中心",
+		RelatedIds:  []string{"com.android.mediacenter"},
 		Name:        "华为音乐",
 	},
 	{
@@ -65,12 +61,8 @@ var Apps2 = [...]models.App{
 	{
 		Id:          "com.huawei.search",
 		Description: "下拉搜索：误解+广告",
+		RelatedIds:  []string{"com.huawei.searchservice"},
 		Name:        "智慧搜索",
-	},
-	{
-		Id:          "com.huawei.searchservice",
-		Description: "下拉搜索：误解+广告",
-		Name:        "智慧搜索服务",
 	},
 	{
 		Id:          "com.huawei.vassistant",
@@ -80,16 +72,7 @@ var Apps2 = [...]models.App{
 	{
 		Id:          "com.huawei.hitouch",
 		Description: "双指按屏扫文字",
-		Name:        "智慧识屏",
-	},
-	{
-		Id:          "com.huawei.hiaction",
-		Description: "双指按屏扫文字",
-		Name:        "智慧识屏",
-	},
-	{
-		Id:          "com.huawei.contentsensor",
-		Description: "双指按屏扫文字",
+		RelatedIds:  []string{"com.huawei.hiaction", "com.huawei.contentsensor"},
 		Name:        "智慧识屏",
 	},
 	{
@@ -108,12 +91,9 @@ var Apps2 = [...]models.App{
 		Name:        "快应用中心",
 	},
 	{
-		Id:   "com.huawei.health",
-		Name: "运行健康",
-	},
-	{
-		Id:   "com.huawei.ohos.health",
-		Name: "运行健康服务",
+		Id:         "com.huawei.health",
+		RelatedIds: []string{"com.huawei.ohos.health"},
+		Name:       "运行健康",
 	},
 }
 
@@ -122,12 +102,8 @@ var Apps3 = [...]models.App{
 	{
 		Id:          "com.huawei.skytone",
 		Description: "",
+		RelatedIds:  []string{"com.huawei.hiskytone"},
 		Name:        "天际通",
-	},
-	{
-		Id:          "com.huawei.hiskytone",
-		Description: "",
-		Name:        "天际通服务",
 	},
 }
 
@@ -151,12 +127,8 @@ var Apps4 = [...]models.App{
 	{
 		Id:          "com.huawei.hiview",
 		Description: "com.huawei.hiview",
+		RelatedIds:  []string{"com.huawei.hiviewtunnel"},
 		Name:        "com.huawei.hiview",
-	},
-	{
-		Id:          "com.huawei.hiviewtunnel",
-		Description: "com.huawei.hiviewtunnel",
-		Name:        "com.huawei.hiviewtunnel",
 	},
 	{
 		Id:          "com.huawei.android.UEInfoCheck",
@@ -188,6 +160,7 @@ var Apps4 = [...]models.App{
 		Description: "现在被智慧建议代替了，但服务依然留在手机里",
 		Name:        "智能建议服务",
 	},
+	//猜测是早期的程序，HarmonyOS 4.0已经没有了
 	{
 		Id:          "com.google.android.marvin.talkback",
 		Description: "残障人士以听代视的服务，卸载影响跳过广告的app",
@@ -196,12 +169,8 @@ var Apps4 = [...]models.App{
 	{
 		Id:          "com.huawei.arengine.service",
 		Description: "大多AR软件自带AR组件，但如果您依赖华为【AR测量】功能，您可以保留",
+		RelatedIds:  []string{"com.huawei.vrservice"},
 		Name:        "AR引擎",
-	},
-	{
-		Id:          "com.huawei.vrservice",
-		Description: "大多AR软件自带AR组件，但如果您依赖华为【AR测量】功能，您可以保留",
-		Name:        "AR引擎服务",
 	},
 	{
 		Id:          "com.huawei.bonevoiceui",
@@ -213,24 +182,17 @@ var Apps4 = [...]models.App{
 		Description: "早年中国移动推出的移动数字短信，给移动用户发短信用流量，资费0.01元",
 		Name:        "RCS服务",
 	},
+	//猜测是早期的程序，HarmonyOS 4.0已经没有了
 	{
 		Id:          "com.android.dreams.basic",
-		Description: "可能影响到一镜到底，没有已经到底的机型可以卸载",
-		Name:        "动态壁纸程序",
-	},
-	{
-		Id:          "com.android.dreams.phototable",
-		Description: "可能影响到一镜到底，没有已经到底的机型可以卸载",
-		Name:        "动态壁纸程序",
+		Description: "可能影响到一镜到底，没有一镜到底的机型可以卸载",
+		RelatedIds:  []string{"com.android.dreams.phototable"},
+		Name:        "屏保程序",
 	},
 	{
 		Id:          "com.huawei.livewallpaper.paradise",
-		Description: "可能影响到一镜到底，没有已经到底的机型可以卸载",
-		Name:        "动态壁纸程序",
-	},
-	{
-		Id:          "com.huawei.livewallpaper.mountaincloud",
-		Description: "可能影响到一镜到底，没有已经到底的机型可以卸载",
+		Description: "可能影响到一镜到底，没有一镜到底的机型可以卸载",
+		RelatedIds:  []string{"com.huawei.livewallpaper.mountaincloud"},
 		Name:        "动态壁纸程序",
 	},
 }

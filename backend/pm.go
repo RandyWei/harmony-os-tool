@@ -71,16 +71,23 @@ func ListApps() ([][]models.App, error) {
 
 // 卸载应用
 // ```pm uninstall --user 0 com.huawei.fastapp```
-func UninstallApp(packageName string) (bool, error) {
+// TODO 这里应该判断卸载了所有应用
+func UninstallApp(packageName string, relatedIds []string) (bool, error) {
 	result, err := AdbShellCommand("pm", "uninstall", "--user", "0", packageName)
+	for _, v := range relatedIds {
+		_, err = AdbShellCommand("pm", "uninstall", "--user", "0", v)
+	}
 	fmt.Printf("UninstallApp:%s\n", result)
 	return result == "Success", err
 }
 
 // 装回应用
 // ```pm install-existing --user 0 com.huawei.fastapp```
-func InstallExistingApp(packageName string) (bool, error) {
+func InstallExistingApp(packageName string, relatedIds []string) (bool, error) {
 	result, err := AdbShellCommand("pm", "install-existing", "--user", "0", packageName)
+	for _, v := range relatedIds {
+		_, err = AdbShellCommand("pm", "install-existing", "--user", "0", v)
+	}
 	fmt.Printf("InstallExistingApp:%s\n", result)
 	return strings.Contains(result, "installed"), err
 }

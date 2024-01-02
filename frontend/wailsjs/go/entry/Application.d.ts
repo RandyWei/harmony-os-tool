@@ -8,12 +8,12 @@ export function Greet(arg1:string):Promise<string>;
 
 export function InstallAdb():Promise<boolean>;
 
-export function InstallExistingApp(arg1:string):Promise<boolean>;
+export function InstallExistingApp(arg1:string,arg2:Array<string>):Promise<boolean>;
 
 export function ListApps():Promise<Array<any>>;
 
 export function ListApps1():Promise<Array<models.App>>;
 
-export function UninstallApp(arg1:string):Promise<boolean>;
+export function UninstallApp(arg1:string,arg2:Array<string>):Promise<boolean>;
 
 export function WaitForDevice():Promise<Array<models.Device>>;

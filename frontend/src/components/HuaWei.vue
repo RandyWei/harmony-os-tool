@@ -11,11 +11,11 @@ async function OpreationApp (app:models.App)  {
         console.log("OpreationApp")
     if(app.installed){
         console.log("卸载")
-        const result = await UninstallApp(app.id)
+        const result = await UninstallApp(app.id,app.related_ids)
         console.log("卸载结果:",result)
     }else{
         console.log("装回")
-        const result = await InstallExistingApp(app.id)
+        const result = await InstallExistingApp(app.id,app.related_ids)
         console.log("装回结果:",result)
     }
     features.value = await ListApps()

@@ -4,6 +4,7 @@ export namespace models {
 	    id: string;
 	    name: string;
 	    description: string;
+	    related_ids: string[];
 	    installed: boolean;
 	    icon: string;
 	    version: string;
@@ -17,6 +18,7 @@ export namespace models {
 	        this.id = source["id"];
 	        this.name = source["name"];
 	        this.description = source["description"];
+	        this.related_ids = source["related_ids"];
 	        this.installed = source["installed"];
 	        this.icon = source["icon"];
 	        this.version = source["version"];

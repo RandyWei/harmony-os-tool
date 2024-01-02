@@ -30,7 +30,7 @@ function checkEnv() {
   connection.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
     connection.deviceConnectState = ConnectState.CONNECTED
-    //TODO 如果设备列表为空，则需要一直检测
+    //如果设备列表为空，则需要一直检测
     if (result.length === 0) {
       device.value = new models.Device()
       setTimeout(() => {

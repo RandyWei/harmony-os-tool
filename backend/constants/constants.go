@@ -116,7 +116,7 @@ var Apps2 = [...]models.App{
 	{
 		Id:          "com.huawei.scanner",
 		Description: "已释放【扫一扫】相机插件,也叫【智慧视觉】，扫码功能建议使用华为浏览器或其它，打开相机的功耗较大",
-		Name:        "智慧视觉（扫一扫）",
+		Name:        "智慧视觉(扫一扫)",
 	},
 	{
 		Id:          "com.huawei.ohos.suggestion",

@@ -57,12 +57,21 @@ func (a *Application) GetAppDir() string {
 	return a.AppDir
 }
 
-func (a *Application) ListApps() ([][]models.App, error) {
-	return backend.ListApps()
+func (a *Application) ListApps1() ([]models.App, error) {
+	return backend.ListApps1()
 }
 
-func (a *Application) ListApps1() ([]models.App, error) {
-	return make([]models.App, 0), nil
+func (a *Application) ListApps2() ([]models.App, error) {
+	return backend.ListApps2()
+}
+func (a *Application) ListApps3() ([]models.App, error) {
+	return backend.ListApps3()
+}
+func (a *Application) ListApps4() ([]models.App, error) {
+	return backend.ListApps4()
+}
+func (a *Application) ListApps5() ([]models.App, error) {
+	return backend.ListApps5()
 }
 
 func (a *Application) UninstallApp(packageName string, relatedIds []string) (bool, error) {

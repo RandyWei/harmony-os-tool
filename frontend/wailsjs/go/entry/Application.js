@@ -18,12 +18,24 @@ export function InstallExistingApp(arg1, arg2) {
   return window['go']['entry']['Application']['InstallExistingApp'](arg1, arg2);
 }
 
-export function ListApps() {
-  return window['go']['entry']['Application']['ListApps']();
-}
-
 export function ListApps1() {
   return window['go']['entry']['Application']['ListApps1']();
+}
+
+export function ListApps2() {
+  return window['go']['entry']['Application']['ListApps2']();
+}
+
+export function ListApps3() {
+  return window['go']['entry']['Application']['ListApps3']();
+}
+
+export function ListApps4() {
+  return window['go']['entry']['Application']['ListApps4']();
+}
+
+export function ListApps5() {
+  return window['go']['entry']['Application']['ListApps5']();
 }
 
 export function UninstallApp(arg1, arg2) {

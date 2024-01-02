@@ -10,9 +10,15 @@ export function InstallAdb():Promise<boolean>;
 
 export function InstallExistingApp(arg1:string,arg2:Array<string>):Promise<boolean>;
 
-export function ListApps():Promise<Array<any>>;
-
 export function ListApps1():Promise<Array<models.App>>;
+
+export function ListApps2():Promise<Array<models.App>>;
+
+export function ListApps3():Promise<Array<models.App>>;
+
+export function ListApps4():Promise<Array<models.App>>;
+
+export function ListApps5():Promise<Array<models.App>>;
 
 export function UninstallApp(arg1:string,arg2:Array<string>):Promise<boolean>;
 

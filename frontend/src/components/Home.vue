@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import {Ref, onMounted, reactive,ref} from 'vue'
-import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/App'
+import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
 import  {ConnectState}  from '../models/ConnectState'
 import DeviceView from "./DeviceView.vue";
 import {models} from "../../wailsjs/go/models";

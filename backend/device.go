@@ -29,6 +29,7 @@ func WaitForDevice(appDir string) ([]models.Device, error) {
 
 	execResult := string(output)
 	//cannot connect to daemon
+	//adb: no devices/emulators found
 	fmt.Println(execResult)
 
 	if strings.Contains(execResult, "List of devices attached") {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, reactive} from 'vue'
+import {Ref, onMounted, reactive,ref} from 'vue'
 import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/App'
 import  {ConnectState}  from '../models/ConnectState'
 import DeviceView from "./DeviceView.vue";
@@ -16,8 +16,9 @@ const adb = reactive({
   installError:"",
 })
 
+const device :Ref<models.Device> = ref(new models.Device) 
+
 const data = reactive({
-  device: {} as models.Device,
   appDir : "",
 })
 
@@ -29,7 +30,16 @@ function checkEnv() {
   connection.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
     connection.deviceConnectState = ConnectState.CONNECTED
-    data.device = result[0]
+    //TODO 如果设备列表为空，则需要一直检测
+    if (result.length === 0) {
+      device.value = new models.Device()
+      setTimeout(() => {
+        checkEnv()
+      }, 1000)
+      return
+    }else {
+      device.value = result[0]
+    }
   }).catch(err => {
     connection.deviceConnectState = ConnectState.ERROR
     connection.errorTip = err
@@ -102,7 +112,7 @@ onMounted(() => {
         </template>
       </el-result>
 
-      <DeviceView :device="data.device"></DeviceView>
+      <DeviceView :device="device"></DeviceView>
 
     </div>
     

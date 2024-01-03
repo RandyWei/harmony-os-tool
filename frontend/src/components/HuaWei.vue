@@ -1,11 +1,24 @@
 <script setup lang="ts">
 
-import { Ref, onMounted, reactive, ref } from 'vue'
+import { Ref, onMounted, reactive, watch,ref } from 'vue'
 import { ListApps, UninstallApp, InstallExistingApp,EnableApp,DisableApp } from "../../wailsjs/go/entry/Application";
 import { models } from '../../wailsjs/go/models';
 import { EventName } from '../models/event'
 import { Util } from '../utils/util'
 import * as wailsRuntime from "../../wailsjs/runtime/runtime";
+
+const props = defineProps({
+    device: {
+        type: models.Device,
+        default: () => ({} as models.Device)
+    },
+    connectState: {
+        type: Number,
+        default: () => (-1)
+    }
+})
+
+const first = ref(true)
 
 const features = reactive({
     apps0: [] as models.App[],
@@ -82,7 +95,24 @@ function OpenUrl(url: string) {
     Util.OpenUrl(url)
 }
 
-onMounted(async() => {
+//监听设备连接
+watch(() => props.connectState, (newVal, oldVal) => {
+    console.log("监听设备连接", newVal, oldVal)
+    if (newVal == -1) {
+        first.value = true
+        features.apps0 = []
+        features.apps1 = []
+        features.apps2 = []
+        features.apps3 = []
+        features.apps4 = []
+        features.apps5 = []
+    } else if (newVal > 0 && first.value){
+        first.value = false
+        loadApp()
+    }
+})
+
+function loadApp(){
     loading.apps0 = true
     loading.apps1 = true
     loading.apps2 = true
@@ -127,7 +157,10 @@ onMounted(async() => {
     ListApps(3)
     ListApps(4)
     ListApps(5)
+}
 
+onMounted(async() => {
+    // loadApp()
 })
 
 </script>

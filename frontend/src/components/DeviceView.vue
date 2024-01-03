@@ -16,15 +16,8 @@ async function FreeMem() {
     memInfo.value = await Free()
 }
 
-//监听设备连接
-watch(() => props.device, (newVal, oldVal) => {
-    if (newVal.id) {
-        FreeMem()
-    }
-})
-
 onMounted(() => {
-
+    FreeMem()
 })
 
 </script>

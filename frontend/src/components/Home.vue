@@ -1,9 +1,16 @@
 <script lang="ts" setup>
-import {Ref, onMounted, reactive,ref} from 'vue'
+import {Ref, onMounted, reactive,ref,watch} from 'vue'
 import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
 import  {ConnectState}  from '../models/ConnectState'
 import DeviceView from "./DeviceView.vue";
 import {models} from "../../wailsjs/go/models";
+
+const props = defineProps({
+    connectState: {
+        type: Number,
+        default: () => (-1)
+    }
+})
 
 const connection = reactive({
   deviceConnectState: ConnectState.CONNECTING,
@@ -29,20 +36,22 @@ const data = reactive({
 function checkEnv() {
   connection.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
-    connection.deviceConnectState = ConnectState.CONNECTED
+    
     //如果设备列表为空，则需要一直检测
     if (result.length === 0) {
+      connection.deviceConnectState = ConnectState.DISCONNECTED
       device.value = new models.Device()
       setTimeout(() => {
         checkEnv()
       }, 1000)
-      return
     }else {
+      connection.deviceConnectState = ConnectState.CONNECTED
       device.value = result[0]
     }
   }).catch(err => {
     connection.deviceConnectState = ConnectState.ERROR
     connection.errorTip = err
+    device.value = new models.Device()
   })
   
 }
@@ -70,9 +79,20 @@ function getAppDir() {
   })
 }
 
+
+//监听设备连接
+watch(() => props.connectState, (newVal, oldVal) => {
+    if (newVal == -1) {
+      connection.deviceConnectState = ConnectState.DISCONNECTED
+    } else if (newVal==0){
+      checkEnv()
+      getAppDir() 
+    }
+})
+
 onMounted(() => {
-  checkEnv()
-  getAppDir() 
+  // checkEnv()
+  // getAppDir() 
 })
 
 </script>
@@ -112,7 +132,11 @@ onMounted(() => {
         </template>
       </el-result>
 
-      <DeviceView :device=device></DeviceView>
+      <DeviceView :device=device v-if="connection.deviceConnectState === ConnectState.CONNECTED"></DeviceView>
+
+      <div v-else-if="connection.deviceConnectState === ConnectState.DISCONNECTED" class="w-full h-screen flex justify-center items-center">
+        设备已断开
+      </div>
 
     </div>
     

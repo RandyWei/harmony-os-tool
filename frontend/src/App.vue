@@ -3,19 +3,52 @@ import Home from "./components/Home.vue";
 import Settings from "./components/Settings.vue";
 import HuaWei from "./components/HuaWei.vue";
 import About from "./components/About.vue";
+import {WaitForDevice} from '../wailsjs/go/entry/Application'
+import { onMounted, ref,Ref } from "vue";
+
 
 //TODO 需要监测设备连接状态来决定是否激活其他的Tab
+const enabled = ref(false)
+const activeName = ref('1')
+const connectState = ref(-1) 
+/**
+ * 检查环境
+ * 主要是检查是否已经安装了adb
+ */
+ function checkEnv() {
+  WaitForDevice().then(result => {
+    //如果设备列表为空，则需要一直检测
+    if (result.length > 0) {
+      enabled.value = true
+      connectState.value++
+    } else {
+      enabled.value = false
+      activeName.value = '1'
+      connectState.value = -1
+    }
+    setTimeout(() => {
+        checkEnv()
+    }, 1000)
+  }).catch(err => {
+    enabled.value = false
+    activeName.value = '1'
+    connectState.value = -1
+  })
+  
+}
 
-
+onMounted(async () => {
+  checkEnv()
+})
 
 </script>
 <template>
   <div class="common-layout h-screen">
-    <el-tabs type="border-card" tab-position="left" stretch class="w-full h-full">
-        <el-tab-pane><template #label><span class="font-size-4">首页</span></template><Home></Home></el-tab-pane>
-        <el-tab-pane label="华为"><template #label><span class="font-size-4">华为</span></template><HuaWei></HuaWei></el-tab-pane>
-        <el-tab-pane><template #label><span class="font-size-4">设置</span></template><Settings></Settings></el-tab-pane>
-        <el-tab-pane label="Role"><template #label><span class="font-size-4">关于</span></template><About></About></el-tab-pane>
+    <el-tabs v-model="activeName" type="border-card" tab-position="left" stretch class="w-full h-full">
+        <el-tab-pane name="1"><template #label><span class="font-size-4">首页</span></template><Home :connectState="connectState"></Home></el-tab-pane>
+        <el-tab-pane name="2" label="华为" lazy ><template #label><span class="font-size-4">华为</span></template><HuaWei :connectState="connectState"></HuaWei></el-tab-pane>
+        <el-tab-pane name="3"><template #label><span class="font-size-4">设置</span></template><Settings></Settings></el-tab-pane>
+        <el-tab-pane name="4" label="Role"><template #label><span class="font-size-4">关于</span></template><About></About></el-tab-pane>
       </el-tabs>
   </div>
 </template>

@@ -105,6 +105,11 @@ func (a *Application) EnableApp(packageName string) (bool, error) {
 	return backend.EnableApp(packageName)
 }
 
+// 查看内存情况
+func (a *Application) Free() (string, error) {
+	return backend.Free()
+}
+
 // 这个方法只是为了在前端生成models.EventData类
 func (a *Application) EventTest() *models.EventData {
 	return nil

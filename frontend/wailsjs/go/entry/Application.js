@@ -18,6 +18,10 @@ export function EventTest() {
   return window['go']['entry']['Application']['EventTest']();
 }
 
+export function Free() {
+  return window['go']['entry']['Application']['Free']();
+}
+
 export function GetAppDir() {
   return window['go']['entry']['Application']['GetAppDir']();
 }

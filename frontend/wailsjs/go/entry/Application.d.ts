@@ -10,6 +10,8 @@ export function EnableApp(arg1:string):Promise<boolean>;
 
 export function EventTest():Promise<models.EventData>;
 
+export function Free():Promise<string>;
+
 export function GetAppDir():Promise<string>;
 
 export function Greet(arg1:string):Promise<string>;

@@ -135,7 +135,7 @@ onMounted(() => {
       <DeviceView :device=device v-if="connection.deviceConnectState === ConnectState.CONNECTED"></DeviceView>
 
       <div v-else-if="connection.deviceConnectState === ConnectState.DISCONNECTED" class="w-full h-screen flex justify-center items-center">
-        设备已断开
+        设备未连接
       </div>
 
     </div>

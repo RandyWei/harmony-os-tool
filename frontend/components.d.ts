@@ -27,6 +27,7 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    Help: typeof import('./src/components/Help.vue')['default']
     Home: typeof import('./src/components/Home.vue')['default']
     HuaWei: typeof import('./src/components/HuaWei.vue')['default']
     Settings: typeof import('./src/components/Settings.vue')['default']

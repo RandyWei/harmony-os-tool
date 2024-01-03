@@ -7,7 +7,7 @@ import { Util } from '../utils/util'
     <el-card header="原作者" shadow="never" class="mb">
         <el-row>
             <el-col :span="12">
-                <img src="../assets/images/header.avif">
+                <img src="../assets/images/header.jpg">
                 <div>
                     B站：<a href="#" target="_blank" @click="Util.OpenUrl('https://space.bilibili.com/430813939')">一只靓仔琦</a>
                 </div>

@@ -40,6 +40,20 @@ export namespace models {
 	        this.model = source["model"];
 	    }
 	}
+	export class EventData {
+	    data: any;
+	    type: number;
+	
+	    static createFrom(source: any = {}) {
+	        return new EventData(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.data = source["data"];
+	        this.type = source["type"];
+	    }
+	}
 
 }
 

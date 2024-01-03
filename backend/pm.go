@@ -16,7 +16,6 @@ func CheckInstalled(packageName string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	fmt.Printf("result:%s\n", result)
 	return strings.Contains(result, packageName), nil
 }
 

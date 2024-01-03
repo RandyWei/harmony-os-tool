@@ -73,6 +73,34 @@ func (a *Application) ListApps4() ([]models.App, error) {
 func (a *Application) ListApps5() ([]models.App, error) {
 	return backend.ListApps5()
 }
+func (a *Application) ListApps(appType int64) {
+	go func() {
+
+		var apps []models.App
+		switch appType {
+		case 1:
+			apps, _ = backend.ListApps1()
+		case 2:
+			apps, _ = backend.ListApps2()
+		case 3:
+			apps, _ = backend.ListApps3()
+		case 4:
+			apps, _ = backend.ListApps4()
+		case 5:
+			apps, _ = backend.ListApps5()
+		}
+		event := &models.Event{
+			Ctx:  a.ctx,
+			Name: models.Event_Refresh_App_List,
+			Data: models.EventData{
+				Type: appType,
+				Data: apps,
+			},
+		}
+		fmt.Printf("ListApps:%d\n", appType)
+		event.Send()
+	}()
+}
 
 func (a *Application) UninstallApp(packageName string, relatedIds []string) (bool, error) {
 	return backend.UninstallApp(packageName, relatedIds)
@@ -80,4 +108,9 @@ func (a *Application) UninstallApp(packageName string, relatedIds []string) (boo
 
 func (a *Application) InstallExistingApp(packageName string, relatedIds []string) (bool, error) {
 	return backend.InstallExistingApp(packageName, relatedIds)
+}
+
+// 这个方法只是为了在前端生成models.EventData类
+func (a *Application) EventTest() *models.EventData {
+	return nil
 }

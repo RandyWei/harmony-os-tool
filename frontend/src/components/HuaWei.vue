@@ -4,6 +4,7 @@ import { Ref, onMounted, reactive, ref } from 'vue'
 import { ListApps, UninstallApp, InstallExistingApp,EnableApp,DisableApp } from "../../wailsjs/go/entry/Application";
 import { models } from '../../wailsjs/go/models';
 import { EventName } from '../models/event'
+import { Util } from '../utils/util'
 import * as wailsRuntime from "../../wailsjs/runtime/runtime";
 
 const features = reactive({
@@ -76,6 +77,11 @@ async function EnabledApp(type: number,app: models.App) {
     }
 }
 
+//使用浏览器打开链接
+function OpenUrl(url: string) {
+    Util.OpenUrl(url)
+}
+
 onMounted(async() => {
     loading.apps0 = true
     loading.apps1 = true
@@ -129,7 +135,7 @@ onMounted(async() => {
 <template>
     <el-scrollbar class="h-screen">
         <div class="pb-10 h-full w-full">
-            <el-card shadow="never" class="w-full" :body-style="{ padding: '0px' }">
+            <el-card shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
                 <el-table :data="features.apps0" :flexible="true" v-loading="loading.apps0">
                     <el-table-column prop="name" label="功能名称" width="150px"></el-table-column>
                     <el-table-column prop="description" label="备注"></el-table-column>
@@ -142,7 +148,7 @@ onMounted(async() => {
                 </el-table>
             </el-card>
 
-            <el-card header="华为全家桶" shadow="never" class="w-full" :body-style="{ padding: '0px' }">
+            <el-card header="华为全家桶" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
                 <el-table :data="features.apps1" :flexible="true" v-loading="loading.apps1">
                     <el-table-column prop="name" label="应用名称" width="150px"></el-table-column>
                     <el-table-column prop="description" label="备注"></el-table-column>
@@ -155,7 +161,7 @@ onMounted(async() => {
                 </el-table>
             </el-card>
 
-            <el-card header="智慧增值服务" shadow="never" class="w-full" :body-style="{ padding: '0px' }">
+            <el-card header="智慧增值服务" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
                 <el-table :data="features.apps2" :flexible="true" v-loading="loading.apps2">
                     <el-table-column prop="name" label="应用名称" width="150px"></el-table-column>
                     <el-table-column prop="description" label="备注"></el-table-column>
@@ -168,7 +174,7 @@ onMounted(async() => {
                 </el-table>
             </el-card>
 
-            <el-card header="系统功能" shadow="never" class="w-full" :body-style="{ padding: '0px' }">
+            <el-card header="系统功能" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
                 <el-table :data="features.apps3" :flexible="true" v-loading="loading.apps3">
                     <el-table-column prop="name" label="应用名称" width="150px"></el-table-column>
                     <el-table-column prop="description" label="备注"></el-table-column>
@@ -181,7 +187,7 @@ onMounted(async() => {
                 </el-table>
             </el-card>
 
-            <el-card header="冗余服务" shadow="never" class="w-full" :body-style="{ padding: '0px' }">
+            <el-card header="冗余服务" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
                 <el-table :data="features.apps4" :flexible="true"  v-loading="loading.apps4">
                     <el-table-column prop="name" label="应用名称" width="150px"></el-table-column>
                     <el-table-column prop="description" label="备注"></el-table-column>
@@ -194,16 +200,17 @@ onMounted(async() => {
                 </el-table>
             </el-card>
 
-            <el-card header="性能" shadow="never" class="w-full" :body-style="{ padding: '0px' }">
-                <div class="text-start">
+            <el-card header="性能" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }">
+                <div class="text-start p-5">
                     <p>据说能够用巅峰性能模式卡出全局120高刷，具体方法自行去酷安搜一下
                     ，早先我是为了打游戏才弄的这个模式的，处理器越差提升越明显，但是记得做好散热
                     ，游戏前务必打开【游戏加速】和手机的【性能模式】，原神帧率和稳定性提升明显
                     ，如您第一次开启，不想调试效果，直接全部解除就行</p>
                     <p>
-                        此链接是荣耀9启用后的效果视频【b站链接】
+                        此链接是荣耀9启用后的效果视频【B站链接】
                     </p>
-                    <p> https://www.bilibili.com/video/BV1aS4y1d7c8?spm_id_from=333.999.0.0
+                    <p> 
+                        <a href="#" target="_blank" @click="OpenUrl('https://www.bilibili.com/video/BV1aS4y1d7c8?spm_id_from=333.999.0.0')">https://www.bilibili.com/video/BV1aS4y1d7c8?spm_id_from=333.999.0.0</a>
                     </p>
                     <p> 选择后按Ctrl/Command + C复制，粘贴至浏览器地址即可观看
                     </p>

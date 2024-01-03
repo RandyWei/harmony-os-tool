@@ -57,27 +57,13 @@ func (a *Application) GetAppDir() string {
 	return a.AppDir
 }
 
-func (a *Application) ListApps1() ([]models.App, error) {
-	return backend.ListApps1()
-}
-
-func (a *Application) ListApps2() ([]models.App, error) {
-	return backend.ListApps2()
-}
-func (a *Application) ListApps3() ([]models.App, error) {
-	return backend.ListApps3()
-}
-func (a *Application) ListApps4() ([]models.App, error) {
-	return backend.ListApps4()
-}
-func (a *Application) ListApps5() ([]models.App, error) {
-	return backend.ListApps5()
-}
 func (a *Application) ListApps(appType int64) {
 	go func() {
 
 		var apps []models.App
 		switch appType {
+		case 0:
+			apps, _ = backend.ListApps0()
 		case 1:
 			apps, _ = backend.ListApps1()
 		case 2:
@@ -97,7 +83,6 @@ func (a *Application) ListApps(appType int64) {
 				Data: apps,
 			},
 		}
-		fmt.Printf("ListApps:%d\n", appType)
 		event.Send()
 	}()
 }
@@ -110,7 +95,22 @@ func (a *Application) InstallExistingApp(packageName string, relatedIds []string
 	return backend.InstallExistingApp(packageName, relatedIds)
 }
 
+// 禁用应用
+func (a *Application) DisableApp(packageName string) (bool, error) {
+	return backend.DisableApp(packageName)
+}
+
+// 启用应用
+func (a *Application) EnableApp(packageName string) (bool, error) {
+	return backend.EnableApp(packageName)
+}
+
 // 这个方法只是为了在前端生成models.EventData类
 func (a *Application) EventTest() *models.EventData {
+	return nil
+}
+
+// 这个方法只是为了在前端生成models.App类
+func (a *Application) AppTest() *models.App {
 	return nil
 }

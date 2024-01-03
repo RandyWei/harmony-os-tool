@@ -24,10 +24,12 @@ import "icu.bughub.app/harmonyos-tool/backend/models"
 // com.google.android.syncadapters.calendar
 // com.google.android.syncadapters.contacts
 // com.google.android.gsf.login
+
+// dumpsys meminfo com.huawei.android.hwouc
 var Apps0 = [...]models.App{
 	{
-		Id:   "com.huawei.fastapp",
-		Name: "谷歌服务",
+		Id:   "com.huawei.android.hwouc",
+		Name: "系统更新服务",
 	},
 }
 
@@ -394,5 +396,24 @@ var Apps4 = [...]models.App{
 		Description: "可能影响到一镜到底，没有一镜到底的机型可以卸载",
 		RelatedIds:  []string{"com.huawei.livewallpaper.mountaincloud"},
 		Name:        "动态壁纸程序",
+	},
+}
+
+// 性能优化
+var Apps5 = [...]models.App{
+	{
+		Id:          "com.huawei.powergenie",
+		Description: "就是powergenie，解除后能拉满手机功耗",
+		Name:        "功耗管理",
+	},
+	{
+		Id:          "com.huawei.iaware",
+		Description: "就是iaware，解除后不杀主动后台",
+		Name:        "后台管理",
+	},
+	{
+		Id:          "com.huawei.android.hwaps",
+		Description: "解除后不降分辨率",
+		Name:        "HWAPS",
 	},
 }

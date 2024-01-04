@@ -324,18 +324,18 @@ var Apps4 = [...]models.App{
 	{
 		Id:          "com.huawei.bd",
 		Description: "com.huawei.bd",
-		Name:        "com.huawei.bd",
+		Name:        "冗余用户体验计划1",
 	},
 	{
 		Id:          "com.huawei.hiview",
 		Description: "com.huawei.hiview",
 		RelatedIds:  []string{"com.huawei.hiviewtunnel"},
-		Name:        "com.huawei.hiview",
+		Name:        "冗余用户体验计划2",
 	},
 	{
 		Id:          "com.huawei.android.UEInfoCheck",
 		Description: "com.huawei.android.UEInfoCheck",
-		Name:        "com.huawei.android.UEInfoCheck",
+		Name:        "冗余用户体验计划3",
 	},
 	{
 		Id:          "com.android.cellbroadcastreceiver",

@@ -3,7 +3,6 @@ package entry
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"icu.bughub.app/harmonyos-tool/backend"
 	"icu.bughub.app/harmonyos-tool/backend/models"
@@ -12,29 +11,23 @@ import (
 // App struct
 type Application struct {
 	ctx      context.Context
-	bundleId string
+	Ctx      context.Context
+	BundleId string
 	AppDir   string
 }
 
 // NewApp creates a new App application struct
 func NewApp() *Application {
-	return &Application{}
+	return &Application{
+		BundleId: "icu.bughub.app.HarmonyOSTool",
+	}
 }
 
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *Application) StartUp(ctx context.Context) {
 	a.ctx = ctx
-	a.bundleId = "icu.bughub.app.HarmonyOSTool"
-
-	configDir, err := os.UserConfigDir()
-	if err != nil {
-		panic(err)
-	}
-	appDir := configDir + string(os.PathSeparator) + a.bundleId
-	//设置环境变量
-	os.Setenv("PATH", os.Getenv("PATH")+":"+appDir+string(os.PathSeparator)+"platform-tools")
-	a.AppDir = appDir
+	a.Ctx = ctx
 }
 
 // Greet returns a greeting for the given name

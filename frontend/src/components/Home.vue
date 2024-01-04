@@ -4,6 +4,7 @@ import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Applica
 import  {ConnectState}  from '../models/ConnectState'
 import DeviceView from "./DeviceView.vue";
 import {models} from "../../wailsjs/go/models";
+import { Util } from '../utils/util'
 
 const props = defineProps({
     connectState: {
@@ -34,9 +35,10 @@ const data = reactive({
  * 主要是检查是否已经安装了adb
  */
 function checkEnv() {
+  Util.Log("checkEnv")
   connection.deviceConnectState = ConnectState.CONNECTING
   WaitForDevice().then(result => {
-    
+    Util.Log("checkEnv:"+JSON.stringify(result))
     //如果设备列表为空，则需要一直检测
     if (result.length === 0) {
       connection.deviceConnectState = ConnectState.DISCONNECTED
@@ -49,6 +51,7 @@ function checkEnv() {
       device.value = result[0]
     }
   }).catch(err => {
+    Util.LogE("checkEnv:"+JSON.stringify(err))
     connection.deviceConnectState = ConnectState.ERROR
     connection.errorTip = err
     device.value = new models.Device()
@@ -62,11 +65,12 @@ function installAdb() {
   adb.installLoading = true
   adb.installText = "下载安装中..."
   InstallAdb().then(result => {
+    Util.Log("installAdb:"+JSON.stringify(result))
     checkEnv()
     adb.installText = "下载安装ADB"
     adb.installLoading = false
   }).catch(err => {
-    console.error(err)
+    Util.LogE("installAdb:"+JSON.stringify(err))
     adb.installError = err
     adb.installText = "下载安装ADB"
     adb.installLoading = false

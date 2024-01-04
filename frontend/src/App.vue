@@ -27,9 +27,6 @@ const connectState = ref(-1)
       activeName.value = '1'
       connectState.value = -1
     }
-    setTimeout(() => {
-        checkEnv()
-    }, 1000)
   }).catch(err => {
     enabled.value = false
     activeName.value = '1'
@@ -40,6 +37,9 @@ const connectState = ref(-1)
 
 onMounted(async () => {
   checkEnv()
+  setInterval(() => {
+    checkEnv()
+  }, 1000)
 })
 
 </script>

@@ -1,8 +1,18 @@
 <script lang="ts" setup>
 import {useDark,useToggle} from '@vueuse/core'
+import { watch } from 'vue';
 
+import * as wailsRuntime from "../../wailsjs/runtime/runtime";
 const isDark = useDark()
-const toggleDark = useToggle(isDark)
+
+watch(isDark, (val) => {
+  console.log(val)
+  if(val){
+    wailsRuntime.WindowSetDarkTheme()
+  }else{
+    wailsRuntime.WindowSetLightTheme()
+  }
+})
 
 </script>
 <template>

@@ -3,7 +3,6 @@ import { defineProps, onMounted, ref, watch } from "vue";
 import {models} from "../../wailsjs/go/models";
 import {Free,Top} from "../../wailsjs/go/entry/Application";
 
-import * as wailsRuntime from "../../wailsjs/runtime/runtime";
 const props = defineProps({
     device: {
         type: models.Device,

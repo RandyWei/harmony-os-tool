@@ -4,6 +4,7 @@ import (
 	"embed"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/logger"
@@ -32,8 +33,11 @@ func main() {
 	//设置环境变量
 	os.Setenv("PATH", os.Getenv("PATH")+":"+appDir+string(os.PathSeparator)+"platform-tools")
 	app.AppDir = appDir
-
-	myLog := logger.NewFileLogger(fmt.Sprintf("%s/%s", appDir, "HarmonyOS工具箱.log"))
+	logDir := appDir + string(os.PathSeparator) + "log"
+	utils.MkDir(logDir)
+	//获取系统当前时间作为日志文件名
+	logName := time.Now().Format("20060102")
+	myLog := logger.NewFileLogger(fmt.Sprintf("%s/%s%s", logDir, logName, ".log"))
 
 	// Create application with options
 	err = wails.Run(&options.App{

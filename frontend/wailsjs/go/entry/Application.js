@@ -42,6 +42,14 @@ export function ListApps(arg1) {
   return window['go']['entry']['Application']['ListApps'](arg1);
 }
 
+export function ProcessTest() {
+  return window['go']['entry']['Application']['ProcessTest']();
+}
+
+export function Top() {
+  return window['go']['entry']['Application']['Top']();
+}
+
 export function UninstallApp(arg1, arg2) {
   return window['go']['entry']['Application']['UninstallApp'](arg1, arg2);
 }

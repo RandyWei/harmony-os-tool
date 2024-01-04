@@ -23,6 +23,7 @@ func AdbShellCommand(ctx context.Context, commands ...string) (string, error) {
 		}
 		return "", e
 	}
-
-	return string(output), nil
+	result := string(output)
+	utils.Log(ctx, result)
+	return result, nil
 }

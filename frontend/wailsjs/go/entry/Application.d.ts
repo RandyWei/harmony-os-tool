@@ -22,6 +22,10 @@ export function InstallExistingApp(arg1:string,arg2:Array<string>):Promise<boole
 
 export function ListApps(arg1:number):Promise<void>;
 
+export function ProcessTest():Promise<models.Process>;
+
+export function Top():Promise<models.TopInfo>;
+
 export function UninstallApp(arg1:string,arg2:Array<string>):Promise<boolean>;
 
 export function WaitForDevice():Promise<Array<models.Device>>;

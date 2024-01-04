@@ -103,6 +103,11 @@ func (a *Application) Free() (string, error) {
 	return backend.Free(a.ctx)
 }
 
+// 查看进程情况
+func (a *Application) Top() (models.TopInfo, error) {
+	return backend.Top(a.ctx)
+}
+
 // 这个方法只是为了在前端生成models.EventData类
 func (a *Application) EventTest() *models.EventData {
 	return nil
@@ -110,5 +115,10 @@ func (a *Application) EventTest() *models.EventData {
 
 // 这个方法只是为了在前端生成models.App类
 func (a *Application) AppTest() *models.App {
+	return nil
+}
+
+// 这个方法只是为了在前端生成models.Process类
+func (a *Application) ProcessTest() *models.Process {
 	return nil
 }

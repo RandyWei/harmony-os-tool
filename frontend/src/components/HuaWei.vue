@@ -97,7 +97,6 @@ function OpenUrl(url: string) {
 
 //监听设备连接
 watch(() => props.connectState, (newVal, oldVal) => {
-    console.log("监听设备连接", newVal, oldVal)
     if (newVal == -1) {
         first.value = true
         features.apps0 = []

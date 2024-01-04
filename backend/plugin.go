@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
+	"icu.bughub.app/harmonyos-tool/backend/utils"
 )
 
 func TryRunAdb() bool {
@@ -41,7 +42,6 @@ func InstallAdb(ctx context.Context, appDir string) (bool, error) {
 	envInfo := wailsRuntime.Environment(ctx)
 	downloadUrl := fmt.Sprintf("%s/platform-tools_r34.0.5-%s.zip", downloadUrlPrefix, envInfo.Platform)
 
-	fmt.Println(downloadUrl)
 	cacheDir := appDir + string(os.PathSeparator) + "cache"
 	//清空缓存目录
 	os.RemoveAll(cacheDir)
@@ -51,23 +51,27 @@ func InstallAdb(ctx context.Context, appDir string) (bool, error) {
 	//下载zip
 	resp, err := http.Get(downloadUrl)
 	if err != nil {
+		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("下载失败了")
 	}
 	defer resp.Body.Close()
 
 	out, err := os.Create(cacheDir + string(os.PathSeparator) + "platform-tools.zip")
 	if err != nil {
+		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("创建文件失败了")
 	}
 	defer out.Close()
 	//然后将响应流和文件流对接起来
 	_, err = io.Copy(out, resp.Body)
 	if err != nil {
+		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("拷贝文件失败了")
 	}
 
 	//解压platform-tools.zip
 	if err := UnZip(appDir, cacheDir+string(os.PathSeparator)+"platform-tools.zip"); err != nil {
+		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("解压失败了")
 	}
 

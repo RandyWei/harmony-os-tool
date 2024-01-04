@@ -12,6 +12,10 @@ func Log(ctx context.Context, message string) {
 	runtime.LogInfo(ctx, message)
 }
 
+func LogE(ctx context.Context, message string) {
+	runtime.LogError(ctx, message)
+}
+
 func Exits(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {

@@ -43,9 +43,6 @@ function checkEnv() {
     if (result.length === 0) {
       connection.deviceConnectState = ConnectState.DISCONNECTED
       device.value = new models.Device()
-      setTimeout(() => {
-        checkEnv()
-      }, 1000)
     }else {
       connection.deviceConnectState = ConnectState.CONNECTED
       device.value = result[0]

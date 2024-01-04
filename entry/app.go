@@ -36,7 +36,7 @@ func (a *Application) Greet(name string) string {
 }
 
 func (a *Application) WaitForDevice() ([]models.Device, error) {
-	return backend.WaitForDevice(a.AppDir)
+	return backend.WaitForDevice(a.ctx, a.AppDir)
 }
 
 func (a *Application) InstallAdb() (bool, error) {
@@ -56,17 +56,17 @@ func (a *Application) ListApps(appType int64) {
 		var apps []models.App
 		switch appType {
 		case 0:
-			apps, _ = backend.ListApps0()
+			apps, _ = backend.ListApps0(a.ctx)
 		case 1:
-			apps, _ = backend.ListApps1()
+			apps, _ = backend.ListApps1(a.ctx)
 		case 2:
-			apps, _ = backend.ListApps2()
+			apps, _ = backend.ListApps2(a.ctx)
 		case 3:
-			apps, _ = backend.ListApps3()
+			apps, _ = backend.ListApps3(a.ctx)
 		case 4:
-			apps, _ = backend.ListApps4()
+			apps, _ = backend.ListApps4(a.ctx)
 		case 5:
-			apps, _ = backend.ListApps5()
+			apps, _ = backend.ListApps5(a.ctx)
 		}
 		event := &models.Event{
 			Ctx:  a.ctx,
@@ -81,26 +81,26 @@ func (a *Application) ListApps(appType int64) {
 }
 
 func (a *Application) UninstallApp(packageName string, relatedIds []string) (bool, error) {
-	return backend.UninstallApp(packageName, relatedIds)
+	return backend.UninstallApp(a.ctx, packageName, relatedIds)
 }
 
 func (a *Application) InstallExistingApp(packageName string, relatedIds []string) (bool, error) {
-	return backend.InstallExistingApp(packageName, relatedIds)
+	return backend.InstallExistingApp(a.ctx, packageName, relatedIds)
 }
 
 // 禁用应用
 func (a *Application) DisableApp(packageName string) (bool, error) {
-	return backend.DisableApp(packageName)
+	return backend.DisableApp(a.ctx, packageName)
 }
 
 // 启用应用
 func (a *Application) EnableApp(packageName string) (bool, error) {
-	return backend.EnableApp(packageName)
+	return backend.EnableApp(a.ctx, packageName)
 }
 
 // 查看内存情况
 func (a *Application) Free() (string, error) {
-	return backend.Free()
+	return backend.Free(a.ctx)
 }
 
 // 这个方法只是为了在前端生成models.EventData类

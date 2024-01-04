@@ -1,24 +1,25 @@
 package backend
 
 import (
+	"context"
 	"errors"
-	"fmt"
 	"os/exec"
 	"strings"
 
 	"icu.bughub.app/harmonyos-tool/backend/models"
+	"icu.bughub.app/harmonyos-tool/backend/utils"
 )
 
 /**
  * 等待设备连接
  */
-func WaitForDevice(appDir string) ([]models.Device, error) {
+func WaitForDevice(ctx context.Context, appDir string) ([]models.Device, error) {
 
 	devices := []models.Device{}
 	cmd := exec.Command("adb", "devices", "-l")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		fmt.Println(err.Error())
+		utils.LogE(ctx, err.Error())
 		e := errors.New("发生了错误")
 		if errors.Is(err, exec.ErrNotFound) {
 			//没有安装adb
@@ -30,7 +31,7 @@ func WaitForDevice(appDir string) ([]models.Device, error) {
 	execResult := string(output)
 	//cannot connect to daemon
 	//adb: no devices/emulators found
-	fmt.Println(execResult)
+	utils.Log(ctx, execResult)
 
 	if strings.Contains(execResult, "List of devices attached") {
 		//按行分割

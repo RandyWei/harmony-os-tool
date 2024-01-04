@@ -100,7 +100,7 @@ onMounted(() => {
 
 <template>
   <main>
-    <div v-loading="connection.deviceConnectState === ConnectState.CONNECTING" element-loading-background="#00000000" id="result" class="w-full h-screen">
+    <div element-loading-background="#00000000" id="result" class="w-full h-screen">
       
       <el-result
       v-if="connection.deviceConnectState === ConnectState.ERROR"
@@ -135,8 +135,8 @@ onMounted(() => {
 
       <DeviceView :device=device v-if="connection.deviceConnectState === ConnectState.CONNECTED"></DeviceView>
 
-      <div v-else-if="connection.deviceConnectState === ConnectState.DISCONNECTED" class="w-full h-screen flex justify-center items-center">
-        设备未连接
+      <div v-else-if="connection.deviceConnectState === ConnectState.CONNECTING||connection.deviceConnectState === ConnectState.DISCONNECTED" class="w-full h-screen flex justify-center items-center">
+        设备未连接，正在监测设备连接状态...  <span v-loading="true" ></span>
       </div>
 
     </div>
@@ -146,4 +146,7 @@ onMounted(() => {
 
 <style scoped>
 
+.el-loading-spinner{
+  font-size: 10px;
+}
 </style>

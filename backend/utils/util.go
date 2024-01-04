@@ -2,9 +2,12 @@ package utils
 
 import (
 	"context"
+	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
+	"icu.bughub.app/harmonyos-tool/backend/models"
 )
 
 // 日志打印
@@ -32,4 +35,18 @@ func MkDir(path string) error {
 		return err
 	}
 	return nil
+}
+
+func GetDir(filePath string) *models.DirModel {
+	var dirModel = new(models.DirModel)
+	var size int64
+	filepath.Walk(filePath, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			size += info.Size()
+		}
+		return err
+	})
+	dirModel.Path = filePath
+	dirModel.Size = fmt.Sprintf("%.2fM", float64(size)/1024/1024)
+	return dirModel
 }

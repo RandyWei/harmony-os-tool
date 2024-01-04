@@ -3,9 +3,11 @@ package entry
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"icu.bughub.app/harmonyos-tool/backend"
 	"icu.bughub.app/harmonyos-tool/backend/models"
+	"icu.bughub.app/harmonyos-tool/backend/utils"
 )
 
 // App struct
@@ -106,6 +108,36 @@ func (a *Application) Free() (string, error) {
 // 查看进程情况
 func (a *Application) Top() (models.TopInfo, error) {
 	return backend.Top(a.ctx)
+}
+
+// 获取adb安装目录，如果不存在则返回空
+func (a *Application) GetAdbDir() *models.DirModel {
+	filePath := a.AppDir + string(os.PathSeparator) + "platform-tools"
+	return utils.GetDir(filePath)
+}
+
+// 获取adb安装目录，如果不存在则返回空
+func (a *Application) GetLogDir() *models.DirModel {
+	filePath := a.AppDir + string(os.PathSeparator) + "log"
+	return utils.GetDir(filePath)
+}
+
+// 删除log目录
+func (a *Application) RemoveLog() {
+	filePath := a.AppDir + string(os.PathSeparator) + "log"
+	dir, _ := os.ReadDir(filePath)
+	for _, file := range dir {
+		os.RemoveAll(filePath + string(os.PathSeparator) + file.Name())
+	}
+}
+
+// 删除adb安装目录
+func (a *Application) RemoveAdb() {
+	filePath := a.AppDir + string(os.PathSeparator) + "platform-tools"
+	dir, _ := os.ReadDir(filePath)
+	for _, file := range dir {
+		os.RemoveAll(filePath + string(os.PathSeparator) + file.Name())
+	}
 }
 
 // 这个方法只是为了在前端生成models.EventData类

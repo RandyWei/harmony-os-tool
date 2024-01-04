@@ -12,7 +12,11 @@ export function EventTest():Promise<models.EventData>;
 
 export function Free():Promise<string>;
 
+export function GetAdbDir():Promise<models.DirModel>;
+
 export function GetAppDir():Promise<string>;
+
+export function GetLogDir():Promise<models.DirModel>;
 
 export function Greet(arg1:string):Promise<string>;
 
@@ -23,6 +27,10 @@ export function InstallExistingApp(arg1:string,arg2:Array<string>):Promise<boole
 export function ListApps(arg1:number):Promise<void>;
 
 export function ProcessTest():Promise<models.Process>;
+
+export function RemoveAdb():Promise<void>;
+
+export function RemoveLog():Promise<void>;
 
 export function Top():Promise<models.TopInfo>;
 

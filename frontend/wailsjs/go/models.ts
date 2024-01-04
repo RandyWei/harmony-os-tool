@@ -40,6 +40,20 @@ export namespace models {
 	        this.model = source["model"];
 	    }
 	}
+	export class DirModel {
+	    path: string;
+	    size: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new DirModel(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.path = source["path"];
+	        this.size = source["size"];
+	    }
+	}
 	export class EventData {
 	    data: any;
 	    type: number;

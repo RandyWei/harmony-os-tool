@@ -22,8 +22,16 @@ export function Free() {
   return window['go']['entry']['Application']['Free']();
 }
 
+export function GetAdbDir() {
+  return window['go']['entry']['Application']['GetAdbDir']();
+}
+
 export function GetAppDir() {
   return window['go']['entry']['Application']['GetAppDir']();
+}
+
+export function GetLogDir() {
+  return window['go']['entry']['Application']['GetLogDir']();
 }
 
 export function Greet(arg1) {
@@ -44,6 +52,14 @@ export function ListApps(arg1) {
 
 export function ProcessTest() {
   return window['go']['entry']['Application']['ProcessTest']();
+}
+
+export function RemoveAdb() {
+  return window['go']['entry']['Application']['RemoveAdb']();
+}
+
+export function RemoveLog() {
+  return window['go']['entry']['Application']['RemoveLog']();
 }
 
 export function Top() {

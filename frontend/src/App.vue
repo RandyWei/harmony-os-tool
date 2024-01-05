@@ -8,7 +8,7 @@ import {WaitForDevice} from '../wailsjs/go/entry/Application'
 import { onMounted, ref,Ref } from "vue";
 
 
-//TODO 需要监测设备连接状态来决定是否激活其他的Tab
+//需要监测设备连接状态来决定是否激活其他的Tab
 const enabled = ref(false)
 const activeName = ref('1')
 const connectState = ref(-1) 

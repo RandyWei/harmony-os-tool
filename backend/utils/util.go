@@ -41,7 +41,7 @@ func GetDir(filePath string) *models.DirModel {
 	var dirModel = new(models.DirModel)
 	var size int64
 	filepath.Walk(filePath, func(path string, info os.FileInfo, err error) error {
-		if !info.IsDir() {
+		if info != nil && !info.IsDir() {
 			size += info.Size()
 		}
 		return err

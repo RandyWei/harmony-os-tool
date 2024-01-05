@@ -43,7 +43,8 @@ onMounted(() => {
 <template>
         <div class="w-full pb-10" id="table-container">
             <div class="sticky top-0 z-9">
-                <div class="text-start w-full">当前连接的设备：{{ device.id }} {{ device.product }} {{ device.model }}</div>
+                <div class="text-start w-full">当前连接的设备： {{ device.brand }} {{ device.model }}</div>
+                <div class="text-start w-full text-size-3">设备序号： {{ device.id }}</div>
                 <hr>
                 <div class="text-start">
                     设备运行情况：

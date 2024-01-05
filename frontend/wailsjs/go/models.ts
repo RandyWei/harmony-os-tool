@@ -28,6 +28,7 @@ export namespace models {
 	    id: string;
 	    product: string;
 	    model: string;
+	    brand: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new Device(source);
@@ -38,6 +39,7 @@ export namespace models {
 	        this.id = source["id"];
 	        this.product = source["product"];
 	        this.model = source["model"];
+	        this.brand = source["brand"];
 	    }
 	}
 	export class DirModel {

@@ -46,6 +46,12 @@ func WaitForDevice(ctx context.Context, appDir string) ([]models.Device, error) 
 					//获取设备名称
 					if index == 0 {
 						device.Id = info
+						prop, _ := GetProp(ctx, info)
+						if strings.Contains(prop, "huawei") {
+							device.Brand = "HuaWei"
+						} else if strings.Contains(prop, "honor") {
+							device.Brand = "Honor"
+						}
 					}
 
 					if strings.Contains(info, "product") {

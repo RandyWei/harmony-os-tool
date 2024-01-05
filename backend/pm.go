@@ -99,6 +99,35 @@ func ListApps5(ctx context.Context) ([]models.App, error) {
 	return apps, nil
 }
 
+func ListModules(ctx context.Context, brand string) ([]models.Module, error) {
+	modules := make([]models.Module, len(constants.HWModules))
+	copy(modules, constants.HWModules[:])
+	return modules, nil
+}
+
+func ListModuleApps(ctx context.Context, id string) ([]models.App, error) {
+	apps := make([]models.App, 0)
+	for _, v := range constants.HWModules {
+		if v.Id == id {
+			if v.Type == "disable" {
+				for _, v := range v.Apps {
+					installed, _ := CheckEnabled(ctx, v.Id)
+					v.Installed = installed
+					apps = append(apps, v)
+				}
+			} else {
+				for _, v := range v.Apps {
+					installed, _ := CheckInstalled(ctx, v.Id)
+					v.Installed = installed
+					apps = append(apps, v)
+				}
+			}
+			break
+		}
+	}
+	return apps, nil
+}
+
 // 卸载应用
 // ```pm uninstall --user 0 com.huawei.fastapp```
 // TODO 这里应该判断卸载了所有应用

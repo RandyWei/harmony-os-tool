@@ -21,7 +21,7 @@ type Event struct {
 
 type EventData struct {
 	Data interface{} `json:"data"`
-	Type int64       `json:"type"`
+	Type string      `json:"type"`
 }
 
 func (event *Event) Send() {

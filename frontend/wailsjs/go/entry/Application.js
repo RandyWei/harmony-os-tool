@@ -50,6 +50,14 @@ export function ListApps(arg1) {
   return window['go']['entry']['Application']['ListApps'](arg1);
 }
 
+export function ListModuleApps(arg1) {
+  return window['go']['entry']['Application']['ListModuleApps'](arg1);
+}
+
+export function ListModules(arg1) {
+  return window['go']['entry']['Application']['ListModules'](arg1);
+}
+
 export function ProcessTest() {
   return window['go']['entry']['Application']['ProcessTest']();
 }

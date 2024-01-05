@@ -26,6 +26,7 @@ import "icu.bughub.app/harmonyos-tool/backend/models"
 // com.google.android.gsf.login
 
 // dumpsys meminfo com.huawei.android.hwouc
+
 var Apps0 = [...]models.App{
 	{
 		Id:   "com.huawei.android.hwouc",
@@ -415,5 +416,44 @@ var Apps5 = [...]models.App{
 		Id:          "com.huawei.android.hwaps",
 		Description: "解除后不降分辨率",
 		Name:        "HWAPS",
+	},
+}
+
+// 华为功能模块
+var HWModules = [...]models.Module{
+	{
+		Id:   "0",
+		Type: "disable",
+		Apps: Apps0[:],
+	},
+	{
+		Id:   "1",
+		Type: "uninstall",
+		Name: "华为全家桶",
+		Apps: Apps1[:],
+	},
+	{
+		Id:   "2",
+		Type: "uninstall",
+		Name: "智慧增值服务",
+		Apps: Apps2[:],
+	},
+	{
+		Id:   "3",
+		Type: "uninstall",
+		Name: "系统功能",
+		Apps: Apps3[:],
+	},
+	{
+		Id:   "4",
+		Type: "uninstall",
+		Name: "冗余服务",
+		Apps: Apps4[:],
+	},
+	{
+		Id:   "5",
+		Type: "uninstall",
+		Name: "性能优化",
+		Apps: Apps5[:],
 	},
 }

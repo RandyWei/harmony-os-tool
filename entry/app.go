@@ -52,6 +52,26 @@ func (a *Application) GetAppDir() string {
 	return a.AppDir
 }
 
+func (a *Application) ListModules(brand string) ([]models.Module, error) {
+	return backend.ListModules(a.ctx, brand)
+}
+
+func (a *Application) ListModuleApps(moduleId string) {
+
+	go func() {
+		apps, _ := backend.ListModuleApps(a.ctx, moduleId)
+		event := &models.Event{
+			Ctx:  a.ctx,
+			Name: models.Event_Refresh_App_List,
+			Data: models.EventData{
+				Type: moduleId,
+				Data: apps,
+			},
+		}
+		event.Send()
+	}()
+}
+
 func (a *Application) ListApps(appType int64) {
 	go func() {
 
@@ -74,7 +94,7 @@ func (a *Application) ListApps(appType int64) {
 			Ctx:  a.ctx,
 			Name: models.Event_Refresh_App_List,
 			Data: models.EventData{
-				Type: appType,
+				Type: string(rune(appType)),
 				Data: apps,
 			},
 		}

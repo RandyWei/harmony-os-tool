@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Home from "./components/Home.vue";
+import ErrorView from "./components/ErrorView.vue";
 import Settings from "./components/Settings.vue";
 import HuaWei from "./components/HuaWei.vue";
 import About from "./components/About.vue";
@@ -71,7 +71,7 @@ onMounted(async () => {
             设备未连接，正在监测设备连接状态...  <span v-loading="true" ></span>
           </div>
 
-          <Home v-else-if="connection.deviceConnectState === ConnectState.ERROR" :message="connection.errorTip"></Home>
+          <ErrorView v-else-if="connection.deviceConnectState === ConnectState.ERROR" :message="connection.errorTip"></ErrorView>
 
           <DeviceView :device=device v-else-if="connection.deviceConnectState === ConnectState.CONNECTED"></DeviceView>
 

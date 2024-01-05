@@ -23,7 +23,6 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ErrorView: typeof import('./src/components/ErrorView.vue')['default']
     Help: typeof import('./src/components/Help.vue')['default']
-    Home: typeof import('./src/components/Home.vue')['default']
     HuaWei: typeof import('./src/components/HuaWei.vue')['default']
     Settings: typeof import('./src/components/Settings.vue')['default']
   }

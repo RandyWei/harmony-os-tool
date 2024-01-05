@@ -5,8 +5,8 @@ import {Free,Top} from "../../wailsjs/go/entry/Application";
 
 const props = defineProps({
     device: {
-        type: models.Device,
-        default: () => ({} as models.Device)
+        type: Object,
+        default: () => ({})
     }
 })
 

@@ -11,10 +11,6 @@ const props = defineProps({
     device: {
         type: models.Device,
         default: () => ({} as models.Device)
-    },
-    connectState: {
-        type: Number,
-        default: () => (-1)
     }
 })
 
@@ -95,21 +91,6 @@ function OpenUrl(url: string) {
     Util.OpenUrl(url)
 }
 
-//监听设备连接
-watch(() => props.connectState, (newVal, oldVal) => {
-    if (newVal == -1) {
-        first.value = true
-        features.apps0 = []
-        features.apps1 = []
-        features.apps2 = []
-        features.apps3 = []
-        features.apps4 = []
-        features.apps5 = []
-    } else if (newVal > 0 && first.value){
-        first.value = false
-        loadApp()
-    }
-})
 
 function loadApp(){
     loading.apps0 = true
@@ -159,7 +140,7 @@ function loadApp(){
 }
 
 onMounted(async() => {
-    // loadApp()
+    loadApp()
 })
 
 </script>

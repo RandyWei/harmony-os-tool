@@ -39,3 +39,14 @@ jobs:
           build-platform: ${{ matrix.build.platform }}
           package: false
           go-version: '1.20'
+      - name: Create Release
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: true
+          files: |
+           build\bin\HarmonyOSTool.exe
+           build/bin/HarmonyOSTool.dmg
+           build/bin/HarmonyOSTool.pkg

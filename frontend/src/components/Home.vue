@@ -1,21 +1,13 @@
 <script lang="ts" setup>
-import {Ref, onMounted, reactive,ref,watch} from 'vue'
-import {WaitForDevice,InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
-import  {ConnectState}  from '../models/ConnectState'
-import DeviceView from "./DeviceView.vue";
-import {models} from "../../wailsjs/go/models";
+import { reactive} from 'vue'
+import {InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
 import { Util } from '../utils/util'
 
 const props = defineProps({
-    connectState: {
-        type: Number,
-        default: () => (-1)
+    message: {
+        type: String,
+        default: () => ("")
     }
-})
-
-const connection = reactive({
-  deviceConnectState: ConnectState.CONNECTING,
-  errorTip: ""
 })
 
 const adb = reactive({
@@ -24,37 +16,10 @@ const adb = reactive({
   installError:"",
 })
 
-const device :Ref<models.Device> = ref(new models.Device) 
-
 const data = reactive({
   appDir : "",
 })
 
-/**
- * 检查环境
- * 主要是检查是否已经安装了adb
- */
-function checkEnv() {
-  Util.Log("checkEnv")
-  connection.deviceConnectState = ConnectState.CONNECTING
-  WaitForDevice().then(result => {
-    Util.Log("checkEnv:"+JSON.stringify(result))
-    //如果设备列表为空，则需要一直检测
-    if (result.length === 0) {
-      connection.deviceConnectState = ConnectState.DISCONNECTED
-      device.value = new models.Device()
-    }else {
-      connection.deviceConnectState = ConnectState.CONNECTED
-      device.value = result[0]
-    }
-  }).catch(err => {
-    Util.LogE("checkEnv:"+JSON.stringify(err))
-    connection.deviceConnectState = ConnectState.ERROR
-    connection.errorTip = err
-    device.value = new models.Device()
-  })
-  
-}
 /**
  * 安装adb
  */
@@ -63,7 +28,6 @@ function installAdb() {
   adb.installText = "下载安装中..."
   InstallAdb().then(result => {
     Util.Log("installAdb:"+JSON.stringify(result))
-    checkEnv()
     adb.installText = "下载安装ADB"
     adb.installLoading = false
   }).catch(err => {
@@ -81,34 +45,18 @@ function getAppDir() {
 }
 
 
-//监听设备连接
-watch(() => props.connectState, (newVal, oldVal) => {
-    if (newVal == -1) {
-      connection.deviceConnectState = ConnectState.DISCONNECTED
-    } else if (newVal==0){
-      checkEnv()
-      getAppDir() 
-    }
-})
-
-onMounted(() => {
-  // checkEnv()
-  // getAppDir() 
-})
-
 </script>
 
 <template>
   <main>
-    <div element-loading-background="#00000000" id="result" class="w-full h-screen">
+    <div id="result" class="w-full h-screen">
       
       <el-result
-      v-if="connection.deviceConnectState === ConnectState.ERROR"
       class="h-full">
         <template #icon>
           <img src="../assets/images/error.png" width="300"  />
         </template>
-        <template #title><h2 class="text-red">{{ connection.errorTip }}</h2></template>
+        <template #title><h2 class="text-red">{{ message }}</h2></template>
         <template #sub-title>
           <div class="flex-col w-full " >
             <ul class="w-full">
@@ -132,21 +80,10 @@ onMounted(() => {
           </div>
         </template>
       </el-result>
-
-      <DeviceView :device=device v-if="connection.deviceConnectState === ConnectState.CONNECTED"></DeviceView>
-
-      <div v-else-if="connection.deviceConnectState === ConnectState.CONNECTING||connection.deviceConnectState === ConnectState.DISCONNECTED" class="w-full h-screen flex justify-center items-center">
-        设备未连接，正在监测设备连接状态...  <span v-loading="true" ></span>
-      </div>
-
     </div>
     
   </main>
 </template>
 
 <style scoped>
-
-.el-loading-spinner{
-  font-size: 10px;
-}
 </style>

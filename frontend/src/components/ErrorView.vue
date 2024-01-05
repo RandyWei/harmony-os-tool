@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive} from 'vue'
+import { reactive,onMounted} from 'vue'
 import {InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
 import { Util } from '../utils/util'
 
@@ -44,6 +44,9 @@ function getAppDir() {
   })
 }
 
+onMounted(() => {
+  getAppDir()
+})
 
 </script>
 

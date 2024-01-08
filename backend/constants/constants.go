@@ -101,7 +101,7 @@ var Apps1 = [...]models.App{
 var Apps2 = [...]models.App{
 	{
 		Id:          "com.huawei.search",
-		Description: "下拉搜索：误解+广告",
+		Description: "下拉搜索：误触+广告",
 		RelatedIds:  []string{"com.huawei.searchservice"},
 		Name:        "智慧搜索",
 	},
@@ -538,7 +538,7 @@ var HonorModules = [...]models.Module{
 		Apps: []models.App{
 			{
 				Id:          "com.hihonor.search",
-				Description: "下拉搜索：误解+广告",
+				Description: "下拉搜索：误触+广告",
 				Name:        "智慧搜索",
 			},
 			{

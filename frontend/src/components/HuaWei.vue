@@ -14,9 +14,12 @@ const props = defineProps({
     }
 })
 
+
+
 const pageData = reactive({
     modules: [] as models.Module[],
-    loadings:[] as boolean[]
+    loadings:[] as boolean[],
+    pageLoading : true
 })
 
 // 卸载/装回
@@ -68,16 +71,17 @@ async function loadApp(){
             }
         }
     })
-
-    ListModules(props.device.brand).then(result => {
-        pageData.modules = result
-        for (let i = 0; i < pageData.modules.length; i++) {
-            pageData.loadings[i] = true
-            ListModuleApps(props.device.brand,pageData.modules[i].id)
-        }
-    }).catch(err => {
-    })
-    
+    setTimeout(() => {
+        ListModules(props.device.brand).then(result => {
+            pageData.modules = result
+            for (let i = 0; i < pageData.modules.length; i++) {
+                pageData.loadings[i] = true
+                ListModuleApps(props.device.brand,pageData.modules[i].id)
+            }
+            pageData.pageLoading = false
+        }).catch(err => {
+        })
+    }, 200);
 }
 
 onMounted(async() => {
@@ -87,7 +91,7 @@ onMounted(async() => {
 </script>
 
 <template>
-    <el-scrollbar class="h-screen">
+    <el-scrollbar class="h-screen" v-loading="pageData.pageLoading" element-loading-background="rgba(0,0,0,0)">
         <div class="pb-10 h-full w-full">
             <el-card v-for="(module,index) in pageData.modules" :key="module.id" :header="module.name" shadow="never" class="w-full mb" :body-style="{ padding: '0px' }"   >
                 <div class="text-start p-5" v-if="module.name.search('性能')!=-1">

@@ -5,7 +5,10 @@
 - B 站：[一只靓仔琦](https://space.bilibili.com/430813939)
 - [爱发电](https://afdian.net/a/GreatGuy)
 
-## 功能
+## 界面
+
+![HarmonyOS 工具箱](screenshots/1.jpg)
+![HarmonyOS 工具箱](screenshots/2.jpg)
 
 ## Live Development
 

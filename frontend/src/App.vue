@@ -37,14 +37,18 @@ const activeName = ref('1')
       }
     } else {
       connection.deviceConnectState = ConnectState.DISCONNECTED
-      activeName.value = '1'
+      if (activeName.value === "2") {
+        activeName.value = '1'
+      }
       device.value = null
     }
   }).catch(err => {
     Util.LogE("checkEnv:"+JSON.stringify(err))
     connection.deviceConnectState = ConnectState.ERROR
     connection.errorTip = err
-    activeName.value = '1'
+    if (activeName.value === "2") {
+      activeName.value = '1'
+    }
     device.value = null
   })
   

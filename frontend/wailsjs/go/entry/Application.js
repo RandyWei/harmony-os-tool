@@ -50,8 +50,8 @@ export function ListApps(arg1) {
   return window['go']['entry']['Application']['ListApps'](arg1);
 }
 
-export function ListModuleApps(arg1) {
-  return window['go']['entry']['Application']['ListModuleApps'](arg1);
+export function ListModuleApps(arg1, arg2) {
+  return window['go']['entry']['Application']['ListModuleApps'](arg1, arg2);
 }
 
 export function ListModules(arg1) {

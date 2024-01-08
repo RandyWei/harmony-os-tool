@@ -29,7 +29,7 @@ async function OpreationApp(index: number,moduleId:string, app: models.App) {
         const result = await InstallExistingApp(app.id, app.related_ids)
         console.log("装回结果:", result)
     }
-    ListModuleApps(moduleId)
+    ListModuleApps(props.device.brand,moduleId)
 }
 
 //EnableApp
@@ -40,13 +40,13 @@ async function EnabledApp(index: number,moduleId:string,app: models.App) {
         console.log("禁用结果:", result)
         //因为禁用进程有延迟，所以需要延迟刷新列表
         setTimeout(() => {
-            ListModuleApps(moduleId)
+            ListModuleApps(props.device.brand,moduleId)
         }, 1000);
     } else {
         const result = await EnableApp(app.id)
         console.log("启用结果:", result)
         //因为启用进程有延迟，所以需要延迟刷新列表
-        ListModuleApps(moduleId)
+        ListModuleApps(props.device.brand,moduleId)
     }
 }
 
@@ -57,6 +57,7 @@ function OpenUrl(url: string) {
 
 
 async function loadApp(){
+
     //监听APP刷新事件
     wailsRuntime.EventsOn(EventName.Event_Refresh_App_List, (data: models.EventData) => {
         for (let i = 0; i < pageData.modules.length; i++) {
@@ -72,7 +73,7 @@ async function loadApp(){
         pageData.modules = result
         for (let i = 0; i < pageData.modules.length; i++) {
             pageData.loadings[i] = true
-            ListModuleApps(pageData.modules[i].id)
+            ListModuleApps(props.device.brand,pageData.modules[i].id)
         }
     }).catch(err => {
     })

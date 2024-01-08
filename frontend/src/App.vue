@@ -32,16 +32,20 @@ const activeName = ref('1')
     
     if (result.length > 0) {
       connection.deviceConnectState = ConnectState.CONNECTED
-      device.value = result[0]
+      if (device.value === null) {
+        device.value = result[0]
+      }
     } else {
       connection.deviceConnectState = ConnectState.DISCONNECTED
       activeName.value = '1'
+      device.value = null
     }
   }).catch(err => {
     Util.LogE("checkEnv:"+JSON.stringify(err))
     connection.deviceConnectState = ConnectState.ERROR
     connection.errorTip = err
     activeName.value = '1'
+    device.value = null
   })
   
 }

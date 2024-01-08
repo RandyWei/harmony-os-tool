@@ -26,7 +26,7 @@ export function InstallExistingApp(arg1:string,arg2:Array<string>):Promise<boole
 
 export function ListApps(arg1:number):Promise<void>;
 
-export function ListModuleApps(arg1:string):Promise<void>;
+export function ListModuleApps(arg1:string,arg2:string):Promise<void>;
 
 export function ListModules(arg1:string):Promise<Array<models.Module>>;
 

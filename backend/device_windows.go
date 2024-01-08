@@ -1,5 +1,5 @@
-//go:build !windows
-// +build !windows
+//go:build windows
+// +build windows
 
 package backend
 
@@ -8,6 +8,7 @@ import (
 	"errors"
 	"os/exec"
 	"strings"
+	"syscall"
 
 	"icu.bughub.app/harmonyos-tool/backend/models"
 	"icu.bughub.app/harmonyos-tool/backend/utils"
@@ -20,6 +21,11 @@ func WaitForDevice(ctx context.Context, appDir string) ([]models.Device, error) 
 
 	devices := []models.Device{}
 	cmd := exec.Command("adb", "devices", "-l")
+
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		HideWindow:    true,
+		CreationFlags: 0x08000000,
+	}
 
 	output, err := cmd.CombinedOutput()
 	if err != nil {

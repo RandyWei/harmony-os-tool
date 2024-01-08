@@ -7,8 +7,6 @@
 
 ## 功能
 
-- 一键关闭所有应用的陀螺仪权限
-
 ## Live Development
 
 To run in live development mode, run `wails dev` in the project directory. This will run a Vite development

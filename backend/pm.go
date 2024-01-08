@@ -100,14 +100,14 @@ func ListApps5(ctx context.Context) ([]models.App, error) {
 }
 
 func ListModules(ctx context.Context, brand string) ([]models.Module, error) {
-	modules := make([]models.Module, len(constants.HWModules))
-	copy(modules, constants.HWModules[:])
+	modules := make([]models.Module, len(constants.Data[brand]))
+	copy(modules, constants.Data[brand][:])
 	return modules, nil
 }
 
-func ListModuleApps(ctx context.Context, id string) ([]models.App, error) {
+func ListModuleApps(ctx context.Context, brand string, id string) ([]models.App, error) {
 	apps := make([]models.App, 0)
-	for _, v := range constants.HWModules {
+	for _, v := range constants.Data[brand] {
 		if v.Id == id {
 			if v.Type == "disable" {
 				for _, v := range v.Apps {

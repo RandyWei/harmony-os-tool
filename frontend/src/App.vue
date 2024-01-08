@@ -69,14 +69,9 @@ onMounted(async () => {
 
         </el-tab-pane>
 
-        <el-tab-pane name="2" lazy v-if="device?.brand === 'HuaWei'">
+        <el-tab-pane name="2" lazy v-if="device">
           <template #label><span class="font-size-4">{{ device?.brand  }}</span></template>
-          <HuaWei></HuaWei>
-        </el-tab-pane>
-
-        <el-tab-pane name="2" lazy v-if="device?.brand === 'honor'">
-          <template #label><span class="font-size-4">{{ device?.brand  }}</span></template>
-          <HuaWei></HuaWei>
+          <HuaWei :device="device"></HuaWei>
         </el-tab-pane>
 
         <el-tab-pane name="3"><template #label><span class="font-size-4">设置</span></template><Settings></Settings></el-tab-pane>

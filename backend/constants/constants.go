@@ -260,11 +260,6 @@ var Apps3 = [...]models.App{
 		Name:        "计算器",
 	},
 	{
-		Id:          "com.android.emergency",
-		Description: "",
-		Name:        "个人紧急信息",
-	},
-	{
 		Id:          "com.android.deskclock",
 		Description: "",
 		Name:        "时 钟",
@@ -290,6 +285,11 @@ var Apps3 = [...]models.App{
 		Description: "云空间可能删不掉，被系统保护\n文件管理可能会一同被卸载",
 		RelatedIds:  []string{"com.huawei.hicloud"},
 		Name:        "云空间",
+	},
+	{
+		Id:          "com.huawei.privatespace",
+		Description: "隐私空间",
+		Name:        "隐私空间",
 	},
 	{
 		Id:   "com.huawei.android.karaoke",
@@ -456,4 +456,376 @@ var HWModules = [...]models.Module{
 		Name: "性能优化",
 		Apps: Apps5[:],
 	},
+}
+
+// 华为功能模块
+var HonorModules = [...]models.Module{
+	{
+		Id:   "0",
+		Type: "disable",
+		Apps: []models.App{
+			{
+				Id:   "com.hihonor.android.hwouc",
+				Name: "系统更新服务",
+			},
+		},
+	},
+	{
+		Id:   "1",
+		Type: "uninstall",
+		Name: "荣耀全家桶",
+		Apps: []models.App{
+			{
+				Id:          "com.hihonor.wallet",
+				Description: "不用NFC建议删",
+				Name:        "钱包",
+			},
+			{
+				Id:          "com.hihonor.himovie",
+				RelatedIds:  []string{"com.hihonor.himovie.partner1", "com.hihonor.himovie.partner2", "com.tencent.qqlivehihonor"},
+				Description: "卸载华为视频后图库内无法打开视频",
+				Name:        "视频",
+			},
+			{
+				Id:          "com.hihonor.music",
+				Description: "",
+				RelatedIds:  []string{"com.android.mediacenter"},
+				Name:        "音乐",
+			},
+			{
+				Id:          "com.huawei.pcassistant",
+				Description: "",
+				RelatedIds:  []string{"com.huawei.android.instantshare"},
+				Name:        "分享",
+			},
+			{
+				Id:          "com.huawei.hwireader",
+				Description: "",
+				RelatedIds:  []string{"com.huawei.hwreader.al", "com.huawei.hnreader", "com.huawei.hwread.al", "com.huawei.hwireader"},
+				Name:        "阅读",
+			},
+			{
+				Id:          "com.hihonor.browser",
+				Description: "",
+				RelatedIds:  []string{"com.android.browser"},
+				Name:        "浏览器",
+			},
+			{
+				Id:          "com.hihonor.appmarket",
+				Description: "",
+				Name:        "应用商店",
+			},
+			{
+				Id:          "com.hihonor.hwid",
+				Description: "",
+				Name:        "HMS core ",
+			},
+			{
+				Id:   "com.hihonor.phoneservice",
+				Name: "服务/我的荣耀",
+			},
+			{
+				Id:          "com.hihonor.ohos.famanager",
+				Description: "请最后卸载服务中心，据说这样能够避免弹出“服务请求失败”",
+				Name:        "服务中心",
+			},
+		},
+	},
+	{
+		Id:   "2",
+		Type: "uninstall",
+		Name: "智慧增值服务",
+		Apps: []models.App{
+			{
+				Id:          "com.hihonor.search",
+				Description: "下拉搜索：误解+广告",
+				Name:        "智慧搜索",
+			},
+			{
+				Id:          "com.hihonor.vassistant",
+				Description: "后台占运存特大",
+				Name:        "智慧语音",
+			},
+			{
+				Id:          "com.hihonor.hitouch",
+				Description: "双指按屏扫文字",
+				RelatedIds:  []string{"com.hihonor.hiaction", "com.hihonor.contentsensor"},
+				Name:        "智慧识屏",
+			},
+			{
+				Id:          "com.hihonor.scanner",
+				Description: "已释放【扫一扫】相机插件,也叫【智慧视觉】，扫码功能建议使用华为浏览器或其它，打开相机的功耗较大",
+				Name:        "智慧视觉(扫一扫)",
+			},
+			{
+				Id:          "com.hihonor.ohos.suggestion",
+				Description: "桌面的智慧卡片",
+				Name:        "智慧建议",
+			},
+			{
+				Id:          "com.hihonor.intelligent",
+				Description: "负一屏，关闭也占运存",
+				Name:        "智慧助手-今天",
+			},
+			{
+				Id:          "com.hihonor.fastapp",
+				Description: "类似小程序中心",
+				Name:        "快应用中心",
+			},
+			{
+				Id:          "com.hihonor.hiai",
+				Description: "",
+				Name:        "智慧引擎",
+			},
+			{
+				Id:         "com.hihonor.health",
+				RelatedIds: []string{"com.hihonor.ohos.health"},
+				Name:       "运行健康",
+			},
+		},
+	},
+	{
+		Id:   "3",
+		Type: "uninstall",
+		Name: "系统功能",
+		Apps: []models.App{
+			{
+				Id:          "com.hihonor.privatespace",
+				Description: "",
+				Name:        "天际通",
+			},
+			{
+				Id:          "com.android.emergency",
+				Description: "",
+				Name:        "紧急信息",
+			},
+			{
+				Id:          "com.hihonor.gameassistant",
+				Description: "",
+				Name:        "游戏空间",
+			},
+			{
+				Id:          "com.android.managedprovisioning",
+				Description: "",
+				Name:        "工作资料设置",
+			},
+			{
+				Id:          "com.android.htmlviewer",
+				Description: "",
+				Name:        "html查看器",
+			},
+			{
+				Id:          "com.baidu.input_hihonor",
+				Description: "据反馈，需要先关闭安全输入法输入密码，否则卸载后不会弹出输入法\n因此请您在设置中将 【输入密码时，启用安全输入键盘】 关闭,  然后继续执行卸载\n不同机型不同情况，希望您谨慎考虑卸载自带输入法，【【小白不建议操作】】\n【无法解锁补救措施】\n在卸载前备份数据！！或提前开启仅充电模式下连接ADB!\n外接键盘解锁！",
+				RelatedIds:  []string{"com.hihonor.ohos.inputmethod"},
+				Name:        "系统输入法",
+			},
+			{
+				Id:          "com.hihonor.controlcenter",
+				Description: "",
+				Name:        "多屏协同",
+			},
+			{
+				Id:          "com.hihonor.meetime",
+				Description: "",
+				RelatedIds:  []string{"com.hihonor.hwvoipservice"},
+				Name:        "畅连",
+			},
+			{
+				Id:          "com.hihonor.videoeditor",
+				Description: "",
+				Name:        "视频剪辑",
+			},
+			{
+				Id:          "com.iflytek.speechsuite",
+				Description: "",
+				RelatedIds:  []string{"com.sohu.sohuvideo.emplayer"},
+				Name:        "讯飞语音引擎",
+			},
+			{
+				Id:          "com.hihonor.android.findmyphone",
+				Description: "",
+				Name:        "查找手机",
+			},
+			{
+				Id:          "com.android.mms.service",
+				Description: "",
+				Name:        "彩信服务",
+			},
+			{
+				Id:          "com.hihonor.magazine",
+				Description: "",
+				Name:        "杂志锁屏",
+			},
+			{
+				Id:          "com.hihonor.localBackup",
+				Description: "",
+				Name:        "备份",
+			},
+			{
+				Id:          "com.hihonor.android.thememanager",
+				Description: "",
+				Name:        "主题",
+			},
+			{
+				Id:          "com.hihonor.hwdetectrepair",
+				Description: "",
+				Name:        "智能检测",
+			},
+			{
+				Id:          "com.android.printspooler",
+				Description: "",
+				RelatedIds:  []string{"com.hihonor.printservice"},
+				Name:        "打印服务",
+			},
+			{
+				Id:          "com.hihonor.hicar",
+				Description: "",
+				Name:        "HiCar智行",
+			},
+			{
+				Id:          "com.hihonor.hidisk",
+				Description: "云空间可能删不掉，被系统保护\n文件管理可能会一同被卸载",
+				RelatedIds:  []string{"com.hihonor.hicloud"},
+				Name:        "云空间",
+			},
+			{
+				Id:          "com.hihonor.privatespace",
+				Description: "隐私空间",
+				Name:        "隐私空间",
+			},
+			{
+				Id:   "com.hihonor.android.projectmenu",
+				Name: "工程菜单",
+			},
+			{
+				Id:   "com.hihonor.scenepack",
+				Name: "旅行助手",
+			},
+			{
+				Id:          "com.hihonor.android.totemweather",
+				Description: "建议使用pure天气替代，更小更简洁更流\n或者可以使用魅族天气，简洁流畅\n并且桌面的天气时间小工具更加美观实用，款式更丰富",
+				Name:        "天气",
+			},
+		},
+	},
+	{
+		Id:   "4",
+		Type: "uninstall",
+		Name: "冗余服务",
+		Apps: []models.App{
+			{
+				Id:          "com.android.stk",
+				Description: " 不是sim卡管理，早年运营商要求加的功能",
+				Name:        "sim卡应用",
+			},
+			{
+				Id:          "com.hihonor.hifolder",
+				Description: "桌面文件夹内推荐应用的毒瘤玩意",
+				Name:        "精品推荐",
+			},
+			{
+				Id:          "com.hihonor.bd",
+				Description: "com.hihonor.bd",
+				Name:        "冗余用户体验计划1",
+			},
+			{
+				Id:          "com.hihonor.hiview",
+				Description: "com.hihonor.hiview",
+				RelatedIds:  []string{"com.hihonor.hiviewtunnel"},
+				Name:        "冗余用户体验计划2",
+			},
+			{
+				Id:          "com.hihonor.android.UEInfoCheck",
+				Description: "com.hihonor.android.UEInfoCheck",
+				Name:        "冗余用户体验计划3",
+			},
+			{
+				Id:          "com.android.cellbroadcastreceiver",
+				Description: "安卓早期遗留",
+				Name:        "小区广播",
+			},
+			{
+				Id:          "com.hihonor.spaceservice",
+				Description: "用于管理地理禁区的，注意是你被管理",
+				Name:        "地理围栏服务",
+			},
+			{
+				Id:          "com.hihonor.tips",
+				Description: "早年安卓2.3推出的桌面提醒小机器人服务",
+				Name:        "tips",
+			},
+			{
+				Id:          "com.google.android.backuptransport",
+				Description: "与框架和服务无关",
+				Name:        "谷歌备份传输",
+			},
+			{
+				Id:   "com.hihonor.pengine",
+				Name: "智能建议服务",
+			},
+			//猜测是早期的程序，HarmonyOS 4.0已经没有了
+			{
+				Id:          "com.google.android.marvin.talkback",
+				Description: "残障人士以听代视的服务，卸载影响跳过广告的app",
+				Name:        "无障碍服务",
+			},
+			{
+				Id:          "com.hihonor.arengine.service",
+				Description: "大多AR软件自带AR组件，但如果您依赖华为【AR测量】功能，您可以保留",
+				RelatedIds:  []string{"com.hihonor.vrservice"},
+				Name:        "AR引擎",
+			},
+			{
+				Id:          "com.hihonor.bonevoiceui",
+				Description: "若您购买了有骨声纹功能的华为产品，建议您保留",
+				Name:        "骨声纹插件",
+			},
+			{
+				Id:          "com.hihonor.rcsserviceapplication",
+				Description: "早年中国移动推出的移动数字短信，给移动用户发短信用流量，资费0.01元",
+				Name:        "RCS服务",
+			},
+			//猜测是早期的程序，HarmonyOS 4.0已经没有了
+			{
+				Id:          "com.android.dreams.basic",
+				Description: "可能影响到一镜到底，没有一镜到底的机型可以卸载",
+				RelatedIds:  []string{"com.android.dreams.phototable"},
+				Name:        "屏保程序",
+			},
+			{
+				Id:          "com.hihonor.livewallpaper.paradise",
+				Description: "可能影响到一镜到底，没有一镜到底的机型可以卸载",
+				RelatedIds:  []string{"com.hihonor.livewallpaper.mountaincloud"},
+				Name:        "动态壁纸程序",
+			},
+		},
+	},
+	{
+		Id:   "5",
+		Type: "uninstall",
+		Name: "性能优化",
+		Apps: []models.App{
+			{
+				Id:          "com.hihonor.powergenie",
+				Description: "就是powergenie，解除后能拉满手机功耗",
+				Name:        "功耗管理",
+			},
+			{
+				Id:          "com.hihonor.iaware",
+				Description: "就是iaware，解除后不杀主动后台",
+				Name:        "后台管理",
+			},
+			{
+				Id:          "com.hihonor.android.hwaps",
+				Description: "解除后不降分辨率",
+				Name:        "HWAPS",
+			},
+		},
+	},
+}
+
+var Data = map[string][]models.Module{
+	"HuaWei": HWModules[:],
+	"Honor":  HonorModules[:],
 }

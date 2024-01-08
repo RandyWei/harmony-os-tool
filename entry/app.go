@@ -56,10 +56,10 @@ func (a *Application) ListModules(brand string) ([]models.Module, error) {
 	return backend.ListModules(a.ctx, brand)
 }
 
-func (a *Application) ListModuleApps(moduleId string) {
+func (a *Application) ListModuleApps(brand string, moduleId string) {
 
 	go func() {
-		apps, _ := backend.ListModuleApps(a.ctx, moduleId)
+		apps, _ := backend.ListModuleApps(a.ctx, brand, moduleId)
 		event := &models.Event{
 			Ctx:  a.ctx,
 			Name: models.Event_Refresh_App_List,

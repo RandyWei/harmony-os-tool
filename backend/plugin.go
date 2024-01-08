@@ -35,18 +35,24 @@ func TryRunAdb() bool {
  * 下载安装adb
  */
 func InstallAdb(ctx context.Context, appDir string) (bool, error) {
+	//https://look.yun.chinahrt.com/u/customer/appPackage/20241/8/wu_1hjjdp9n51n1do231otb54v1fh6c.apk
 	//https://gitee.com/RandyWei/harmony-os-tool/raw/main/attachment/platform-tools_r34.0.5-windows.zip
+
+	//https://look.yun.chinahrt.com/u/customer/appPackage/20241/8/wu_1hjjdln602sma6n7j58113j54.apk
 	//https://gitee.com/RandyWei/harmony-os-tool/raw/main/attachment/platform-tools_r34.0.5-darwin.zip
 	//获取当前系统类型
-	downloadUrlPrefix := "https://docs.bughub.icu"
+	downloadUrlPrefix := "https://look.yun.chinahrt.com/u/customer/appPackage/20241/8/"
 	envInfo := wailsRuntime.Environment(ctx)
-	downloadUrl := fmt.Sprintf("%s/platform-tools_r34.0.5-%s.zip", downloadUrlPrefix, envInfo.Platform)
+	fileName := "wu_1hjjdp9n51n1do231otb54v1fh6c"
+	if envInfo.Platform == "darwin" {
+		fileName = "wu_1hjjdln602sma6n7j58113j54"
+	}
+	downloadUrl := fmt.Sprintf("%s%s.apk", downloadUrlPrefix, fileName)
 
 	cacheDir := appDir + string(os.PathSeparator) + "cache"
 	//清空缓存目录
 	os.RemoveAll(cacheDir)
 	os.MkdirAll(cacheDir, 0755)
-	fmt.Println(cacheDir)
 
 	//下载zip
 	resp, err := http.Get(downloadUrl)
@@ -73,6 +79,12 @@ func InstallAdb(ctx context.Context, appDir string) (bool, error) {
 	if err := UnZip(appDir, cacheDir+string(os.PathSeparator)+"platform-tools.zip"); err != nil {
 		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("解压失败了")
+	}
+
+	//删除zip文件
+	if err := os.Remove(cacheDir + string(os.PathSeparator) + "platform-tools.zip"); err != nil {
+		utils.LogE(ctx, err.Error())
+		return false, fmt.Errorf("删除文件失败了")
 	}
 
 	return true, nil

@@ -4,13 +4,14 @@ import (
 	"embed"
 	"fmt"
 	"os"
+	"runtime"
 	"time"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/logger"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
-	"github.com/wailsapp/wails/v2/pkg/runtime"
+	wailsRuntime "github.com/wailsapp/wails/v2/pkg/runtime"
 	"icu.bughub.app/harmonyos-tool/backend/utils"
 	"icu.bughub.app/harmonyos-tool/entry"
 )
@@ -31,7 +32,11 @@ func main() {
 	utils.MkDir(appDir)
 
 	//设置环境变量
-	os.Setenv("PATH", os.Getenv("PATH")+":"+appDir+string(os.PathSeparator)+"platform-tools")
+	delimiter := ":"
+	if runtime.GOOS == "windows" {
+		delimiter = ";"
+	}
+	os.Setenv("PATH", os.Getenv("PATH")+delimiter+appDir+string(os.PathSeparator)+"platform-tools")
 	app.AppDir = appDir
 	logDir := appDir + string(os.PathSeparator) + "log"
 	utils.MkDir(logDir)
@@ -58,7 +63,7 @@ func main() {
 	})
 
 	if err != nil {
-		runtime.LogInfo(app.Ctx, err.Error())
+		wailsRuntime.LogInfo(app.Ctx, err.Error())
 		println("Error:", err.Error())
 	}
 }

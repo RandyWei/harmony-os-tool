@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import { reactive,onMounted} from 'vue'
+import {useDark} from '@vueuse/core'
 import {InstallAdb,GetAppDir} from '../../wailsjs/go/entry/Application'
 import { Util } from '../utils/util'
+
+const isDark = useDark()
 
 const props = defineProps({
     message: {
@@ -57,7 +60,7 @@ onMounted(() => {
       <el-result
       class="h-full">
         <template #icon>
-          <img src="../assets/images/error.png" width="300"  />
+          <img src="../assets/images/error.png" width="300" :class=' isDark ? "" : "darkImg" ' />
         </template>
         <template #title><h2 class="text-red">{{ message }}</h2></template>
         <template #sub-title>
@@ -89,4 +92,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.darkImg{
+  filter: invert(1) hue-rotate(.5turn);
+}
 </style>

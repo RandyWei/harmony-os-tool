@@ -24,9 +24,16 @@ async function FetchTopInfo() {
 }
 
 function onResize(){
+    console.log("onResize")
     //重新计算表格高度
     let bodyElement = document.querySelector("body") as HTMLElement
     let tableElement = document.querySelector("#table") as HTMLElement
+    if(!tableElement||tableElement==null||!tableElement.offsetParent){
+        setTimeout(() => {
+            onResize()
+        }, 500)
+        return
+    }
     let bodyHeight = document.body.clientHeight | bodyElement.clientHeight
     let tableTopContainerHeight = (tableElement.offsetParent as HTMLElement).offsetLeft - tableElement.offsetLeft 
     scrollBarHeight.value = bodyHeight - tableTopContainerHeight

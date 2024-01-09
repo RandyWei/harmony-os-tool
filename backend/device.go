@@ -1,6 +1,3 @@
-//go:build !windows
-// +build !windows
-
 package backend
 
 import (
@@ -20,7 +17,7 @@ func WaitForDevice(ctx context.Context, appDir string) ([]models.Device, error) 
 
 	devices := []models.Device{}
 	cmd := exec.Command("adb", "devices", "-l")
-
+	PrepareBackgroundCommand(cmd)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		utils.LogE(ctx, err.Error())

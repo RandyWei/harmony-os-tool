@@ -1,6 +1,3 @@
-//go:build !windows
-// +build !windows
-
 package backend
 
 import (
@@ -15,6 +12,7 @@ import (
 func AdbShellCommand(ctx context.Context, commands ...string) (string, error) {
 	commands = append([]string{"shell"}, commands...)
 	cmd := exec.Command("adb", commands...)
+	PrepareBackgroundCommand(cmd)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err.Error())

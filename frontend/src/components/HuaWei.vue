@@ -25,12 +25,16 @@ const pageData = reactive({
 // 卸载/装回
 async function OpreationApp(index: number,moduleId:string, app: models.App) {
     pageData.loadings[index] = true
-    if (app.installed) {
-        const result = await UninstallApp(app.id, app.related_ids)
-        console.log("卸载结果:", result)
-    } else {
-        const result = await InstallExistingApp(app.id, app.related_ids)
-        console.log("装回结果:", result)
+    try {
+        if (app.installed) {
+            const result = await UninstallApp(app.id, app.related_ids)
+            console.log("卸载结果:", result)
+        } else {
+            const result = await InstallExistingApp(app.id, app.related_ids)
+            console.log("装回结果:", result)
+        }
+    } catch (error) {
+        
     }
     ListModuleApps(props.device.brand,moduleId)
 }

@@ -14,13 +14,15 @@ import (
 type Application struct {
 	ctx      context.Context
 	Ctx      context.Context
+	pm       *PackageManager
 	BundleId string
 	AppDir   string
 }
 
 // NewApp creates a new App application struct
-func NewApp() *Application {
+func NewApp(pm *PackageManager) *Application {
 	return &Application{
+		pm:       pm,
 		BundleId: "icu.bughub.app.HarmonyOSTool",
 	}
 }
@@ -30,6 +32,7 @@ func NewApp() *Application {
 func (a *Application) StartUp(ctx context.Context) {
 	a.ctx = ctx
 	a.Ctx = ctx
+	a.pm.ctx = ctx
 }
 
 // Greet returns a greeting for the given name
@@ -50,74 +53,6 @@ func (a *Application) InstallAdb() (bool, error) {
  */
 func (a *Application) GetAppDir() string {
 	return a.AppDir
-}
-
-func (a *Application) ListModules(brand string) ([]models.Module, error) {
-	return backend.ListModules(a.ctx, brand)
-}
-
-func (a *Application) ListModuleApps(brand string, moduleId string) {
-
-	go func() {
-		apps, _ := backend.ListModuleApps(a.ctx, brand, moduleId)
-		event := &models.Event{
-			Ctx:  a.ctx,
-			Name: models.Event_Refresh_App_List,
-			Data: models.EventData{
-				Type: moduleId,
-				Data: apps,
-			},
-		}
-		event.Send()
-	}()
-}
-
-func (a *Application) ListApps(appType int64) {
-	go func() {
-
-		var apps []models.App
-		switch appType {
-		case 0:
-			apps, _ = backend.ListApps0(a.ctx)
-		case 1:
-			apps, _ = backend.ListApps1(a.ctx)
-		case 2:
-			apps, _ = backend.ListApps2(a.ctx)
-		case 3:
-			apps, _ = backend.ListApps3(a.ctx)
-		case 4:
-			apps, _ = backend.ListApps4(a.ctx)
-		case 5:
-			apps, _ = backend.ListApps5(a.ctx)
-		}
-		event := &models.Event{
-			Ctx:  a.ctx,
-			Name: models.Event_Refresh_App_List,
-			Data: models.EventData{
-				Type: string(rune(appType)),
-				Data: apps,
-			},
-		}
-		event.Send()
-	}()
-}
-
-func (a *Application) UninstallApp(packageName string, relatedIds []string) (bool, error) {
-	return backend.UninstallApp(a.ctx, packageName, relatedIds)
-}
-
-func (a *Application) InstallExistingApp(packageName string, relatedIds []string) (bool, error) {
-	return backend.InstallExistingApp(a.ctx, packageName, relatedIds)
-}
-
-// 禁用应用
-func (a *Application) DisableApp(packageName string) (bool, error) {
-	return backend.DisableApp(a.ctx, packageName)
-}
-
-// 启用应用
-func (a *Application) EnableApp(packageName string) (bool, error) {
-	return backend.EnableApp(a.ctx, packageName)
 }
 
 // 查看内存情况
@@ -161,16 +96,16 @@ func (a *Application) RemoveAdb() {
 }
 
 // 这个方法只是为了在前端生成models.EventData类
-func (a *Application) EventTest() *models.EventData {
+func (a *Application) EventExposed() *models.EventData {
 	return nil
 }
 
 // 这个方法只是为了在前端生成models.App类
-func (a *Application) AppTest() *models.App {
+func (a *Application) AppExposed() *models.App {
 	return nil
 }
 
 // 这个方法只是为了在前端生成models.Process类
-func (a *Application) ProcessTest() *models.Process {
+func (a *Application) ProcessExposed() *models.Process {
 	return nil
 }

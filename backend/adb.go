@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"os/exec"
+	"strings"
 
 	"icu.bughub.app/harmonyos-tool/backend/utils"
 )
@@ -16,7 +17,7 @@ func AdbShellCommand(ctx context.Context, commands ...string) (string, error) {
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(err.Error())
-		utils.LogE(ctx, err.Error())
+		utils.LogE(ctx, strings.Join(commands, " ")+" AdbShellCommand:"+err.Error())
 		e := errors.New("发生了错误")
 		if errors.Is(err, exec.ErrNotFound) {
 			//没有安装adb
@@ -25,6 +26,6 @@ func AdbShellCommand(ctx context.Context, commands ...string) (string, error) {
 		return "", e
 	}
 	result := string(output)
-	utils.Log(ctx, result)
+	// utils.Log(ctx, result)
 	return result, nil
 }

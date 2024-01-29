@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import { Ref, onMounted, reactive, watch,ref } from 'vue'
-import { UninstallApp, InstallExistingApp,EnableApp,DisableApp,ListModuleApps,ListModules } from "../../wailsjs/go/entry/Application";
+import { UninstallApp, InstallExistingApp,EnableApp,DisableApp,ListModuleApps,ListModules } from "../../wailsjs/go/entry/PackageManager";
 import { models } from '../../wailsjs/go/models';
 import { EventName } from '../models/event'
 import { Util } from '../utils/util'

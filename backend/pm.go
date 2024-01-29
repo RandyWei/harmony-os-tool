@@ -19,9 +19,11 @@ func CheckInstalled(ctx context.Context, packageName string) (bool, error) {
 		utils.LogE(ctx, err.Error())
 		return false, err
 	}
+	// utils.Log(ctx, result)
 	return strings.Contains(result, packageName), nil
 }
 
+// 系统服务需要通过```dumpsys meminfo com.huawei.android.hwouc```查询是否占用内存来判断是否启用禁用
 func CheckEnabled(ctx context.Context, packageName string) (bool, error) {
 	result, err := AdbShellCommand(ctx, "dumpsys", "meminfo", packageName)
 	if err != nil {
@@ -133,8 +135,14 @@ func ListModuleApps(ctx context.Context, brand string, id string) ([]models.App,
 // TODO 这里应该判断卸载了所有应用
 func UninstallApp(ctx context.Context, packageName string, relatedIds []string) (bool, error) {
 	result, err := AdbShellCommand(ctx, "pm", "uninstall", "--user", "0", packageName)
+	if err != nil {
+		utils.LogE(ctx, err.Error())
+	}
 	for _, v := range relatedIds {
 		_, err = AdbShellCommand(ctx, "pm", "uninstall", "--user", "0", v)
+		if err != nil {
+			utils.LogE(ctx, err.Error())
+		}
 	}
 	fmt.Printf("UninstallApp:%s\n", result)
 	return result == "Success", err

@@ -10,6 +10,11 @@
 ![HarmonyOS 工具箱](screenshots/1.jpg)
 ![HarmonyOS 工具箱](screenshots/2.jpg)
 
+## scrcpy 投屏原理
+
+am stack list 查看任务栈
+am force-stop packageId
+
 ## Live Development
 
 To run in live development mode, run `wails dev` in the project directory. This will run a Vite development

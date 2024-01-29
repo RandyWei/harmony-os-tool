@@ -26,9 +26,7 @@ const activeName = ref('1')
  * 主要是检查是否已经安装了adb
  */
  function checkEnv() {
-  Util.Log("checkEnv")
   WaitForDevice().then(result => {
-    Util.Log("checkEnv:"+JSON.stringify(result))
     
     if (result.length > 0) {
       connection.deviceConnectState = ConnectState.CONNECTED

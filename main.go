@@ -20,8 +20,10 @@ import (
 var assets embed.FS
 
 func main() {
+
+	pm := entry.NewPackageManager()
 	// Create an instance of the app structure
-	app := entry.NewApp()
+	app := entry.NewApp(pm)
 
 	configDir, err := os.UserConfigDir()
 	if err != nil {
@@ -56,6 +58,7 @@ func main() {
 		OnStartup:        app.StartUp,
 		Bind: []interface{}{
 			app,
+			pm,
 		},
 		Logger:             myLog,
 		LogLevel:           logger.INFO,

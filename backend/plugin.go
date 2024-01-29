@@ -76,7 +76,7 @@ func InstallAdb(ctx context.Context, appDir string) (bool, error) {
 	}
 
 	//解压platform-tools.zip
-	if err := UnZip(appDir, cacheDir+string(os.PathSeparator)+"platform-tools.zip"); err != nil {
+	if err := unzip(appDir, cacheDir+string(os.PathSeparator)+"platform-tools.zip"); err != nil {
 		utils.LogE(ctx, err.Error())
 		return false, fmt.Errorf("解压失败了")
 	}
@@ -90,7 +90,7 @@ func InstallAdb(ctx context.Context, appDir string) (bool, error) {
 	return true, nil
 }
 
-func UnZip(dst, src string) (err error) {
+func unzip(dst, src string) (err error) {
 	// 打开压缩文件，这个 zip 包有个方便的 ReadCloser 类型
 	// 这个里面有个方便的 OpenReader 函数，可以比 tar 的时候省去一个打开文件的步骤
 	zr, err := zip.OpenReader(src)

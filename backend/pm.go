@@ -24,13 +24,16 @@ func CheckInstalled(ctx context.Context, packageName string) (bool, error) {
 }
 
 // 系统服务需要通过```dumpsys meminfo com.huawei.android.hwouc```查询是否占用内存来判断是否启用禁用
+// No process 找不到进程的时候就说明已经禁用
+// 上面的方式判断有一个问题，就是如果进程没有启动也会出现No process
+// 采用 pm list packages -d 表示只列出禁用的应用
 func CheckEnabled(ctx context.Context, packageName string) (bool, error) {
-	result, err := AdbShellCommand(ctx, "dumpsys", "meminfo", packageName)
+	result, err := AdbShellCommand(ctx, "pm", "list", "packages", "-d", "|", "grep", packageName)
 	if err != nil {
 		utils.LogE(ctx, err.Error())
-		return false, err
+		return true, err
 	}
-	return !strings.Contains(result, "No process"), nil
+	return !strings.Contains(result, packageName), nil
 }
 
 // 系统服务需要通过```dumpsys meminfo com.huawei.android.hwouc```查询是否占用内存来判断是否启用禁用
@@ -144,7 +147,6 @@ func UninstallApp(ctx context.Context, packageName string, relatedIds []string) 
 			utils.LogE(ctx, err.Error())
 		}
 	}
-	fmt.Printf("UninstallApp:%s\n", result)
 	return result == "Success", err
 }
 
@@ -174,7 +176,5 @@ func DisableApp(ctx context.Context, packageName string) (bool, error) {
 func EnableApp(ctx context.Context, packageName string) (bool, error) {
 	result, err := AdbShellCommand(ctx, "pm", "enable", packageName)
 	utils.Log(ctx, result)
-	//启动更新进程，以确保服务运行起来，这样就可以更新前端状态
-	StartApp(ctx, "com.huawei.android.hwouc", "com.huawei.android.hwouc.ui.activities.MainEntranceActivity")
 	return strings.Contains(result, "enabled"), err
 }

@@ -14,7 +14,7 @@ import (
 //
 // ```pm list packages | grep "fastapp"```
 func CheckInstalled(ctx context.Context, packageName string) (bool, error) {
-	result, err := AdbShellCommand(ctx, "pm", "list", "packages", "|", "grep", packageName)
+	result, err := AdbShellCommand(ctx, "pm", "list", "packages", packageName)
 	if err != nil {
 		utils.LogE(ctx, err.Error())
 		return false, err
@@ -28,7 +28,7 @@ func CheckInstalled(ctx context.Context, packageName string) (bool, error) {
 // 上面的方式判断有一个问题，就是如果进程没有启动也会出现No process
 // 采用 pm list packages -d 表示只列出禁用的应用
 func CheckEnabled(ctx context.Context, packageName string) (bool, error) {
-	result, err := AdbShellCommand(ctx, "pm", "list", "packages", "-d", "|", "grep", packageName)
+	result, err := AdbShellCommand(ctx, "pm", "list", "packages", "-d")
 	if err != nil {
 		utils.LogE(ctx, err.Error())
 		return true, err
